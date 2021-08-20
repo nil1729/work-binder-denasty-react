@@ -1,34 +1,52 @@
-import React from 'react'
-import { SidebarContainer,Icon,CloseIcon,SidebarWrapper,
-    SidebarLink,SidebarMenu } from 
-'./SidebarElements';
-const Sidebar = ({isOpen,toggle}) => {
-    return (
-        <SidebarContainer isOpen ={isOpen} onClick={toggle}>
-            <Icon onClick={toggle}>
-                <CloseIcon/>
-            </Icon>
-            <SidebarWrapper>
-                <SidebarMenu>
-                    <SidebarLink to ="home" onClick={toggle}>
-                        HOME
-                    </SidebarLink>
-                    <SidebarLink to ="blog" onClick={toggle}>
-                        BLOG
-                    </SidebarLink>
-                    <SidebarLink to ="trade calculator" onClick={toggle}>
-                        TRADE CALCULATOR
-                    </SidebarLink>
-                    <SidebarLink to ="rankings" onClick={toggle}>
-                        RANKINGS
-                    </SidebarLink>
-                    <SidebarLink to ="login" onClick={toggle}>
-                        LOGIN
-                    </SidebarLink>
-                </SidebarMenu>
-            </SidebarWrapper>
-        </SidebarContainer>
-    )
-}
+import React, { useState } from 'react';
+import './sidebar.css';
+import {
+	SidebarContainer,
+	Icon,
+	CloseIcon,
+	SidebarWrapper,
+	SidebarLink,
+	SidebarMenu,
+} from './SidebarElements';
+
+import { Link } from 'react-router-dom';
+
+const Sidebar = ({ isOpen, toggle }) => {
+	const sideMenus = [
+		{
+			title: 'home',
+			path: '/',
+		},
+		{
+			title: 'blog',
+			path: '/blog',
+		},
+		{
+			title: 'trade calculator',
+			path: '/trade-calculator',
+		},
+		{
+			title: 'ranking',
+			path: '/ranking',
+		},
+		{
+			title: 'login',
+			path: '/login',
+		},
+	];
+	return (
+		<nav className={isOpen ? 'nav-menu active' : 'nav-menu'}>
+			<ul className='nav-menu-items' onClick={toggle}>
+				{sideMenus.map((item, index) => {
+					return (
+						<li key={index} className='nav-text'>
+							<Link to={item.path}>{item.title}</Link>
+						</li>
+					);
+				})}
+			</ul>
+		</nav>
+	);
+};
 
 export default Sidebar;
