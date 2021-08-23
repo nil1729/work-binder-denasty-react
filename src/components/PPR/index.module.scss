@@ -1,0 +1,109 @@
+@import '../../styles/variables';
+
+.container {
+	width: 800px;
+	margin: auto;
+	margin-top: 2rem;
+	@media (max-width: 600px) {
+		width: 95%;
+		margin-top: 1.5rem;
+	}
+}
+
+.page_title {
+	font-family: 'Nunito Sans', sans-serif;
+	font-size: 45px;
+	font-weight: 500;
+	text-align: center;
+	color: #753eca;
+	text-transform: uppercase;
+	margin-bottom: 1rem;
+	@media (max-width: 600px) {
+		font-size: 40px;
+	}
+}
+
+.tab_btn_container {
+	font-family: 'Nunito Sans', sans-serif;
+	background-color: #f2f2f2;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	border-radius: 20px;
+	overflow: hidden;
+	width: 75%;
+	margin: 0 auto;
+}
+
+.tab_btn {
+	width: 100%;
+	text-align: center;
+	padding: 8px 0;
+	font-size: 17px;
+	border-radius: 20px;
+	cursor: pointer;
+	height: 100%;
+}
+
+.tab_active {
+	background-color: $primary-color;
+	color: $primary-text-color;
+	transition: 0.25s ease-in-out;
+}
+
+.table {
+	width: 100%;
+	margin: 2rem auto;
+}
+
+.table__header {
+	display: flex;
+	width: 100%;
+	padding: 10px 0;
+	font-family: 'Nunito Sans', sans-serif;
+	font-size: 18px;
+	color: #000;
+}
+
+.table__row {
+	display: flex;
+	width: 100%;
+	padding: 15px 0;
+	font-family: 'Nunito Sans', sans-serif;
+	border-radius: 15px;
+
+	&.odd_row {
+		background-color: rgba(228, 218, 218, 0.589);
+	}
+}
+
+.table__data,
+.header__item {
+	flex: 1 1 20%;
+	text-align: center;
+	width: 100%;
+
+	&.name__column {
+		text-align: left;
+	}
+}
+
+.header__item {
+	text-transform: capitalize;
+}
+
+.table__data.rank_index h3 {
+	font-size: 22px;
+	color: $primary-color;
+	font-weight: 700;
+}
+
+.table__data {
+	font-size: 18px;
+	text-transform: capitalize;
+
+	&.uppercase {
+		text-transform: uppercase;
+		color: rgb(143, 136, 136);
+	}
+}

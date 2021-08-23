@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './App.css';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Home from './pages/Index';
 import Blog from './pages/Blog';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
+import PPR from './pages/PPR';
 
 function App() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +20,7 @@ function App() {
 				<Route exact path='/' component={Home} />
 				<Redirect from='/home' to='/' />
 				<Route exact path='/blog' component={Blog} />
+				<Route exact path='/rankings' component={PPR}></Route>
 			</Switch>
 		</Router>
 	);
