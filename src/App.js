@@ -5,6 +5,7 @@ import Blog from './pages/Blog';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import PPR from './pages/PPR';
+import Users from './pages/Users';
 
 function App() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +22,7 @@ function App() {
 				<Redirect from='/home' to='/' />
 				<Route exact path='/blog' component={Blog} />
 				<Route exact path='/rankings' component={PPR}></Route>
+				<Route exact path='/users' component={Users}></Route>
 			</Switch>
 		</Router>
 	);
