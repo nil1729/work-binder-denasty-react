@@ -1,0 +1,151 @@
+@import '../../styles/variables';
+
+.container {
+	width: 825px;
+	margin: auto;
+	margin-top: 2rem;
+	margin-bottom: 3rem;
+
+	@media (max-width: 600px) {
+		width: 95%;
+		margin-top: 1.5rem;
+	}
+}
+
+.top_progress {
+	width: 70%;
+	margin: auto;
+	background-color: rgba(216, 208, 208, 0.815);
+	height: 15px;
+	border-radius: 10px;
+
+	.top_progress_bar {
+		height: 100%;
+		border-radius: 10px;
+		background-color: $primary-color;
+		width: 15%;
+		transition: all 0.3s;
+	}
+}
+.question_header {
+	margin-bottom: 1.2rem;
+	.question_num {
+		font-family: $primary-font;
+		text-align: center;
+		font-weight: 500;
+		margin-top: 1rem;
+		margin-bottom: 1.2rem;
+		font-size: 17px;
+	}
+	.question_text {
+		font-family: $primary-font;
+		text-align: center;
+		font-weight: 500;
+		font-size: 20px;
+	}
+}
+
+.sortable_container {
+	margin: auto;
+	display: flex;
+	width: 65%;
+	position: relative;
+
+	.number_column {
+		flex-basis: 20%;
+		display: flex;
+		flex-direction: column;
+		padding-right: 15px;
+		user-select: none;
+
+		h2 {
+			font-family: $primary-font;
+			text-align: right;
+			font-weight: 500;
+			font-size: 25px;
+			color: $primary-color;
+			height: 50px;
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			margin-bottom: 15px;
+		}
+	}
+	.draggable_container {
+		flex-basis: 70%;
+		position: relative;
+
+		.draggable__item__absolute {
+			position: absolute;
+			height: 50px;
+			width: 100%;
+			border-radius: 7px;
+			z-index: -1;
+			background-image: linear-gradient(to right, rgba(172, 172, 175, 0.493) 50%, transparent 50%),
+				linear-gradient(to right, rgba(172, 172, 175, 0.493) 50%, transparent 50%),
+				linear-gradient(to bottom, rgba(172, 172, 175, 0.493) 50%, transparent 50%),
+				linear-gradient(to bottom, rgba(172, 172, 175, 0.493) 50%, transparent 50%);
+			background-position: left top, left bottom, left top, right top;
+			background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+			background-size: 20px 2px, 20px 2px, 2px 20px, 2px 20px;
+		}
+
+		.draggable__item {
+			height: 50px;
+			box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+			border-radius: 7px;
+			margin-bottom: 15px;
+			padding: 0 15px;
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			background-color: rgb(255, 255, 255);
+
+			.three__dot {
+				flex-basis: 5%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+
+				& > div {
+					height: 4.5px;
+					width: 4.5px;
+					background-color: rgba(128, 128, 128, 0.746);
+					border-radius: 50%;
+					margin-bottom: 3px;
+				}
+			}
+
+			.body__text {
+				margin-left: 20px;
+				font-family: $primary-font;
+				user-select: none;
+			}
+		}
+	}
+}
+
+.action_btn_container {
+	text-align: center;
+	margin-top: 1.2rem;
+
+	.next_btn {
+		background-color: $primary-color;
+		text-transform: uppercase;
+		width: 45%;
+		margin: 0 auto 20px;
+		color: $primary-text-color;
+		padding: 10px 0;
+		border-radius: 25px;
+		cursor: pointer;
+	}
+	.reset_btn {
+		text-transform: uppercase;
+		width: fit-content;
+		margin: auto;
+		cursor: pointer;
+		color: $secondary-text-color;
+	}
+}

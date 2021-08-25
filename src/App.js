@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import PPR from './pages/PPR';
 import Users from './pages/Users';
+import Question from './pages/Question';
 
 function App() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +24,7 @@ function App() {
 				<Route exact path='/blog' component={Blog} />
 				<Route exact path='/rankings' component={PPR}></Route>
 				<Route exact path='/users' component={Users}></Route>
+				<Route exact path='/question' component={Question}></Route>
 			</Switch>
 		</Router>
 	);
