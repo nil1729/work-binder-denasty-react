@@ -26,8 +26,8 @@ const Sidebar = ({ isOpen, toggle }) => {
 			path: '/trade-calculator',
 		},
 		{
-			title: 'ranking',
-			path: '/ranking',
+			title: 'rankings',
+			path: '/rankings',
 		},
 		{
 			title: 'login',

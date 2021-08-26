@@ -34,13 +34,13 @@ const Navbar = ({ toggle, openStatus }) => {
 							<NavLinks to='/blog'>BLOG</NavLinks>
 						</NavItem>
 						<NavItem>
-							<NavLinks to='trade calculator'>TRADE CALCULATOR</NavLinks>
+							<NavLinks to='/trade-calculator'>TRADE CALCULATOR</NavLinks>
 						</NavItem>
 						<NavItem>
-							<NavLinks to='rankings'>RANKINGS</NavLinks>
+							<NavLinks to='/rankings'>RANKINGS</NavLinks>
 						</NavItem>
 						<NavItem>
-							<NavLinks to='login'>LOGIN</NavLinks>
+							<NavLinks to='/login'>LOGIN</NavLinks>
 						</NavItem>
 					</NavMenu>
 				</NavbarContainer>
