@@ -1,49 +1,38 @@
 {
-	"name": "dynasty-dealer",
-	"version": "0.1.0",
-	"private": true,
-	"dependencies": {
-		"@testing-library/jest-dom": "^5.14.1",
-		"@testing-library/react": "^11.2.7",
-		"@testing-library/user-event": "^12.8.3",
-		"node-sass": "^6.0.1",
-		"react": "^17.0.2",
-		"react-beautiful-dnd": "^13.1.0",
-		"react-dom": "^17.0.2",
-		"react-icons": "^4.2.0",
-		"react-router-dom": "^5.2.0",
-		"react-scripts": "4.0.3",
-		"react-scroll": "^1.8.3",
-		"styled-components": "^5.3.0",
-		"web-vitals": "^1.1.2"
-	},
+	"name": "dynasty-trader",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
 	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject",
-		"deploy": "npm run build && gh-pages -d build && rm -rf build"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node index.js",
+		"dev": "nodemon index.js"
 	},
-	"eslintConfig": {
-		"extends": [
-			"react-app",
-			"react-app/jest"
-		]
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nil1729/work-binder-denasty-react.git"
 	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/nil1729/work-binder-denasty-react/issues"
 	},
-	"homepage": "https://nil1729.github.io/work-binder-denasty-react",
+	"homepage": "https://github.com/nil1729/work-binder-denasty-react#readme",
+	"dependencies": {
+		"@sendgrid/mail": "^7.4.6",
+		"bcryptjs": "^2.4.3",
+		"chalk": "^4.1.2",
+		"cookie-parser": "^1.4.5",
+		"cors": "^2.8.5",
+		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^6.0.2",
+		"morgan": "^1.10.0",
+		"slugify": "^1.6.0"
+	},
 	"devDependencies": {
-		"gh-pages": "^3.2.3"
+		"dotenv": "^10.0.0",
+		"nodemon": "^2.0.12"
 	}
 }
