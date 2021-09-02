@@ -2,7 +2,9 @@ const User = require('../models/User');
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/asyncHandler');
 const sendEmail = require('../utils/sendingMail');
-
+const ejs = require('ejs');
+const path = require('path');
+const fs = require('fs');
 /*
 @desc   User Register
 @route  POST /api/v1/auth/register
@@ -98,11 +100,9 @@ exports.logout = asyncHandler(async (req, res, next) => {
 		maxAge: 10,
 		httpOnly: true,
 	};
-
 	if (process.env.NODE_ENV === 'production') {
 		cookieOptions.secure = true;
 	}
-
 	res.status(200).cookie('TOKEN', null, cookieOptions).json({
 		success: true,
 		data: req.user,
@@ -167,7 +167,7 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
 
 /*
 @desc   Send an email to the specified user
-@route  POST /api/v1/auth/forgotpassword
+@route  POST /api/v1/auth/forgot_password
 @access Public 
 */
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
@@ -188,9 +188,7 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 		query = User.findOne({ username: username });
 		findByMethod = 'username';
 	}
-
 	const user = await query;
-
 	if (!user) {
 		throw new ErrorResponse(
 			`The ${findByMethod} you entered did not match any of our records`,
@@ -199,46 +197,29 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 	}
 
 	let resetPasswordToken = user.generateResetPasswordToken();
-
 	await user.save({ validateBeforeSave: false });
 
-	// Generate URL for reset password request
-	const url = `${req.protocol}://${req.get(
-		'host'
-	)}/api/v1/auth/resetPassword/${resetPasswordToken}`;
-
-	const mainBody = `
-		<h4>Hi, ${user.name}</h4>
-		<p> We have received a password reset request for your account on <b>${process.env.PROJECT_NAME}</b>. Please go to this following link to reset your password</p>
-		<h4><a href="${url}">Click Here</a></h4>
-	`;
-
 	// Mail Options
-	const options = {
-		mail: user.email,
-		subject: 'Reset Password Request',
-		mainBody,
-	};
-
-	let msg;
+	const options = setupForgotPasswordEmailTemplate(user, resetPasswordToken);
 
 	// Sending Mail to User
-	if (process.env.NODE_ENV === 'production') {
-		await sendEmail(options);
-		msg = 'Reset Password link sent to your email address.';
-		resetPasswordToken = undefined;
-	}
+	// if (process.env.NODE_ENV === 'production') {
+	// 	await sendEmail(options);
+	// 	msg = 'Reset Password link sent to your email address.';
+	// 	resetPasswordToken = undefined;
+	// }
 
 	res.status(200).json({
 		success: true,
-		msg,
+		message: msg,
 		resetPasswordToken,
+		options,
 	});
 });
 
 /*
 @desc   Send an email to the specified user
-@route  PUT /api/v1/auth/resetpasword/:resetToken
+@route  PUT /api/v1/auth/reset_password/:reset_token
 @access Public
 */
 exports.resetPasswordViaToken = asyncHandler(async (req, res, next) => {
@@ -266,6 +247,26 @@ exports.resetPasswordViaToken = asyncHandler(async (req, res, next) => {
 		msg: 'Your Password has been reset. Please login to continue',
 	});
 });
+
+const setupForgotPasswordEmailTemplate = async (user, token) => {
+	const templateHTML = fs.readFileSync(
+		path.join(__dirname, '../utils/email_template.html'),
+		'utf8'
+	);
+	const mainHTML = ejs.render(templateHTML, {
+		userName: user.name,
+		resetToken: token,
+	});
+
+	// Mail Options
+	const options = {
+		mail: user.email,
+		subject: 'Reset Password Request',
+		mainBody: mainHTML,
+	};
+
+	return options;
+};
 
 // Send Token with Cookie
 const sendTokenResponseWithCookie = async (user, statusCode, res) => {
