@@ -223,14 +223,14 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 @access Public
 */
 exports.resetPasswordViaToken = asyncHandler(async (req, res, next) => {
-	let { resetToken } = req.params;
+	let { reset_token } = req.params;
 	const { password } = req.body;
 
 	if (!password) {
 		throw new ErrorResponse('Please provide a password', 400);
 	}
 
-	let user = await User.validateResetPasswordRequest(resetToken);
+	let user = await User.validateResetPasswordRequest(reset_token);
 
 	if (!user) {
 		throw new ErrorResponse('Oops! May be your reset password session expired', 403);

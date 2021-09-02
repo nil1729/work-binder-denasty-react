@@ -43,12 +43,33 @@ const signInUser =
 				email,
 				password,
 			});
-			console.log(res.data);
 			setAuthToken(res.data.responses.accessToken);
 			dispatch({ type: SIGN_IN, payload: res.data });
 			dispatch({
 				type: ADD_ALERTS,
 				payload: { variant: 'success', message: 'Successfully signed in' },
+			});
+			return true;
+		} catch (e) {
+			console.log(e);
+			dispatch({
+				type: ADD_ALERTS,
+				payload: { variant: 'error', message: e.response && e.response.data.message },
+			});
+		}
+	};
+
+// Sign in a user (Email and Password)
+const forgotPasswordRequest =
+	({ email }) =>
+	async (dispatch) => {
+		try {
+			const res = await sendRequest.post('/auth/forgot_password', {
+				email,
+			});
+			dispatch({
+				type: ADD_ALERTS,
+				payload: { variant: 'success', message: res.data.message },
 			});
 			return true;
 		} catch (e) {
@@ -74,4 +95,4 @@ const logOut = () => async (dispatch) => {
 	});
 };
 
-export { signInUser, logOut, clearAlerts, loadUser };
+export { signInUser, logOut, clearAlerts, loadUser, forgotPasswordRequest };
