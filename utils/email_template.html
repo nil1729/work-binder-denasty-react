@@ -6,92 +6,95 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
 		<style>
-			* {
-				margin: 10px auto;
-				padding: 0;
-				background-color: #ccc;
+			body {
+				margin: auto;
+				background-color: rgba(204, 204, 204, 0.733);
+				padding: 15px;
 				font-family: 'Arial';
+				font-weight: 300 !important;
 			}
 
-			table {
-				border-collapse: collapse;
+			.container {
 				max-width: 800px;
-				background-color: #fff;
 				box-sizing: border-box;
+				background-color: #f7f7f7;
+				margin: 20px auto;
 			}
 
-			th {
+			.text_body {
+				margin-top: 15px;
+				padding: 0 20px 20px 15px;
+			}
+
+			.text_body p {
+				margin-bottom: 10px;
+				margin-top: 10px;
+			}
+
+			.my_logo {
+				padding-top: 7px;
+				padding-bottom: 7px;
 				width: 100%;
-				border-bottom: 1px solid #ccc;
-				text-align: left;
-				padding: 15px 20px;
-
-				background-color: #fff;
+				height: 75px;
+				border-bottom: 1px solid grey;
 			}
 
-			th img {
-				background-color: #753eca;
+			.my_logo img {
+				height: 100%;
+				width: auto;
+				margin-left: 25px;
+			}
+			.my_link_div {
+				margin-top: 25px;
+				margin-bottom: 30px;
 			}
 
-			td {
-				margin: 0;
-				padding: 7px;
-				padding-left: 20px;
-				background-color: #fff;
-			}
-
-			td button {
+			.my_link {
 				padding: 12px;
 				border: none;
 				background-color: #753eca;
 				color: #fff;
 				cursor: pointer;
+				text-decoration: none;
+			}
+			.last_p {
+				font-size: 13px;
+				color: grey;
+			}
+
+			@media screen and (max-width: 600px) {
+				.text_body {
+					margin-top: 15px;
+					padding: 0 15px 20px 25px;
+				}
 			}
 		</style>
 	</head>
 
 	<body>
-		<table>
-			<th>
-				<img src="http://localhost:5000/static/logo.jpeg" alt="logo" />
-			</th>
+		<div class="container">
+			<div class="my_logo">
+				<img src="https://dynastydealer.herokuapp.com/static/logo.jpeg" alt="logo" />
+			</div>
 
-			<tbody>
-				<tr>
-					<td>Hi Nilanjan,</td>
-				</tr>
-				<tr>
-					<td>A Password reset for your account was required.</td>
-				</tr>
-				<tr>
-					<td>Please click the button below to change your Password.</td>
-				</tr>
-				<tr>
-					<td>
-						Note that this link is valid for 24 hours. After the time limit has expired, you will
-						have to resubmit the request for a password reset.
-					</td>
-				</tr>
-
-				<tr>
-					<td><button>Change Your Password</button></td>
-				</tr>
-				<tr>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-				</tr>
-				<tr>
-					<td>Delivered by DynastyDealer,....</td>
-				</tr>
-				<tr>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
+			<div class="text_body">
+				<p>Hi <%= userName %>,</p>
+				<p>A Password reset for your account was required.</p>
+				<p>Please click the button below to change your Password.</p>
+				<p>
+					Note that this link is valid for 10 minutes. After the time limit has expired, you will
+					have to resubmit the request for a password reset.
+				</p>
+				<div class="my_link_div">
+					<a
+						href="https://dynastydealer.herokuapp.com/forgot_password/<%= resetToken %>"
+						class="my_link"
+					>
+						Change Your Password
+					</a>
+				</div>
+				<p class="last_p">Delivered by Dynasty Dealer Server Admin</p>
+			</div>
+		</div>
 	</body>
 </html>

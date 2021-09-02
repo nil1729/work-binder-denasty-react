@@ -204,11 +204,11 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 	let msg;
 
 	// Sending Mail to User
-	// if (process.env.NODE_ENV === 'production') {
-	// 	await sendEmail(options);
-	// 	msg = 'Reset Password link sent to your email address.';
-	// 	resetPasswordToken = undefined;
-	// }
+	if (process.env.NODE_ENV === 'production') {
+		await sendEmail(options);
+		msg = 'Reset Password link sent to your email address.';
+		resetPasswordToken = undefined;
+	}
 
 	res.status(200).json({
 		success: true,
@@ -249,7 +249,7 @@ exports.resetPasswordViaToken = asyncHandler(async (req, res, next) => {
 	});
 });
 
-const setupForgotPasswordEmailTemplate = async (user, token) => {
+const setupForgotPasswordEmailTemplate = (user, token) => {
 	const templateHTML = fs.readFileSync(
 		path.join(__dirname, '../utils/email_template.html'),
 		'utf8'
