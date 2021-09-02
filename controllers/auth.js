@@ -244,7 +244,7 @@ exports.resetPasswordViaToken = asyncHandler(async (req, res, next) => {
 
 	res.status(200).json({
 		success: true,
-		msg: 'Your Password has been reset. Please login to continue',
+		message: 'Your Password has been reset. Please login to continue',
 	});
 });
 

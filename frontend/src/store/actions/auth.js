@@ -81,6 +81,27 @@ const forgotPasswordRequest =
 		}
 	};
 
+const resetPasswordRequest =
+	({ password, reset_token }) =>
+	async (dispatch) => {
+		try {
+			const res = await sendRequest.put(`/auth/reset_password/${reset_token}`, {
+				password,
+			});
+			dispatch({
+				type: ADD_ALERTS,
+				payload: { variant: 'success', message: res.data.message },
+			});
+			return true;
+		} catch (e) {
+			console.log(e);
+			dispatch({
+				type: ADD_ALERTS,
+				payload: { variant: 'error', message: e.response && e.response.data.message },
+			});
+		}
+	};
+
 const clearAlerts = () => async (dispatch) => {
 	dispatch({ type: CLEAR_ALERTS });
 };
@@ -95,4 +116,4 @@ const logOut = () => async (dispatch) => {
 	});
 };
 
-export { signInUser, logOut, clearAlerts, loadUser, forgotPasswordRequest };
+export { signInUser, logOut, clearAlerts, loadUser, forgotPasswordRequest, resetPasswordRequest };
