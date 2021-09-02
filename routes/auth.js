@@ -9,7 +9,7 @@ const {
 	register,
 	login,
 	logout,
-	getProfile,
+	getAuthUser,
 	forgotPassword,
 	resetPasswordViaToken,
 	updateDetails,
@@ -23,9 +23,9 @@ router.route('/login').post(login);
 
 router.route('/logout').get(logout);
 
-router.route('/profile').get(protectRoute, getProfile).put(protectRoute, updateDetails);
+router.route('/user').get(protectRoute, getAuthUser).put(protectRoute, updateDetails);
 
-router.route('/profile/change_password').put(protectRoute, updatePassword);
+router.route('/user/change_password').put(protectRoute, updatePassword);
 
 router.route('/forgot_password').post(forgotPassword);
 

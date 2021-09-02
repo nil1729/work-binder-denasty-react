@@ -1,6 +1,36 @@
-import { SIGN_IN, LOG_OUT, ADD_ALERTS, CLEAR_ALERTS } from '../types';
+import {
+	SIGN_IN,
+	LOAD_USER,
+	LOG_OUT,
+	STOP_INITIAL_LOADER,
+	ADD_ALERTS,
+	AUTH_ERROR,
+	CLEAR_ALERTS,
+} from '../types';
 
 import sendRequest, { setAuthToken } from '../utils/axios-setup';
+
+// Load user on Start
+const loadUser = () => async (dispatch) => {
+	try {
+		let accessToken = localStorage.getItem('ACCESS_TOKEN');
+		if (accessToken) setAuthToken(accessToken);
+		else return dispatch({ type: STOP_INITIAL_LOADER });
+
+		const res = await sendRequest.get('/auth/user');
+		dispatch({ type: LOAD_USER, payload: res.data });
+	} catch (e) {
+		setAuthToken();
+		dispatch({ type: AUTH_ERROR });
+		dispatch({ type: STOP_INITIAL_LOADER });
+		if (e.response && e.response.status === 403) {
+			dispatch({
+				type: ADD_ALERTS,
+				payload: e.response && e.response.data,
+			});
+		}
+	}
+};
 
 // Sign in a user (Email and Password)
 const signInUser =
@@ -82,7 +112,7 @@ const signInUser =
 //       });
 //     }
 //   };
-const clearAlers = () => async (dispatch) => {
+const clearAlerts = () => async (dispatch) => {
 	dispatch({ type: CLEAR_ALERTS });
 };
 
@@ -98,4 +128,4 @@ const logOut = () => async (dispatch) => {
 	});
 };
 
-export { signInUser, logOut, clearAlers };
+export { signInUser, logOut, clearAlerts };

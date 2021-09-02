@@ -1,12 +1,12 @@
 import axios from 'axios';
 let instance = axios.create({
-	baseURL: 'https://nodesql2021.herokuapp.com/api/v1',
+	baseURL: 'https://dynastydealer.herokuapp.com/api/v1',
 	timeout: 5000,
 });
 
 if (process.env.NODE_ENV === 'production') {
 	instance = axios.create({
-		baseURL: 'https://nodesql2021.herokuapp.com/api/v1',
+		baseURL: 'https://dynastydealer.herokuapp.com/api/v1',
 		timeout: 5000,
 	});
 }

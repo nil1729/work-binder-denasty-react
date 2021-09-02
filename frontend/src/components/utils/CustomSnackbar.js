@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import { clearAlers } from '../../store/actions/auth';
+import { clearAlerts } from '../../store/actions/auth';
 import { connect } from 'react-redux';
 function Alert(props) {
 	return <MuiAlert elevation={6} variant='filled' {...props} />;
@@ -33,7 +33,7 @@ const CustomSnackbar = ({ alerts }) => {
 			return;
 		}
 		setOpen(false);
-		clearAlers();
+		clearAlerts();
 	};
 
 	return (
@@ -55,4 +55,4 @@ const mapStateToProps = (state) => ({
 	alerts: state.ALERTS,
 });
 
-export default connect(mapStateToProps, { clearAlers })(CustomSnackbar);
+export default connect(mapStateToProps, { clearAlerts })(CustomSnackbar);

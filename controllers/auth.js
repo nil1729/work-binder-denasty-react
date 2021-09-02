@@ -77,10 +77,10 @@ exports.login = asyncHandler(async (req, res, next) => {
 
 /*
 @desc   Get Logged in User Information
-@route  POST /api/v1/auth/profile
+@route  POST /api/v1/auth/user
 @access Private 
 */
-exports.getProfile = asyncHandler(async (req, res, next) => {
+exports.getAuthUser = asyncHandler(async (req, res, next) => {
 	res.status(200).json({
 		success: true,
 		data: req.user,

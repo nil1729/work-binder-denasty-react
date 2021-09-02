@@ -2,21 +2,16 @@ import React, { useState, useEffect } from 'react';
 import Divider from '@material-ui/core/Divider';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Checkbox from '@material-ui/core/Checkbox';
-// import Link from '@material-ui/core/Link';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
-// import Box from '@material-ui/core/Box';
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
 import { useHistory, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signInUser } from '../store/actions/auth';
 import checker from '../components/utils/checkFields';
+
 function useQuery() {
 	return new URLSearchParams(useLocation().search);
 }
@@ -85,7 +80,6 @@ const SignIn = ({ authState: { isAuthenticated }, signInUser, ...rest }) => {
 	const [wrongUserInput, setWrongUserInput] = useState({ email: false });
 	const [attempt, setAttempt] = useState(0);
 
-	console.log(isAuthenticated);
 	useEffect(() => {
 		if (isAuthenticated) {
 			console.log(isAuthenticated);
@@ -117,7 +111,7 @@ const SignIn = ({ authState: { isAuthenticated }, signInUser, ...rest }) => {
 		setSubmitted(true);
 
 		// Validate email and password strength
-		if (!validateInput(userInput.email)) return;
+		if (!validateInput(userInput.email)) return setSubmitted(false);
 
 		// call redux action with data
 		const isSuccess = await signInUser(userInput);
@@ -138,7 +132,6 @@ const SignIn = ({ authState: { isAuthenticated }, signInUser, ...rest }) => {
 			});
 			return false;
 		}
-
 		return true;
 	};
 
@@ -172,6 +165,7 @@ const SignIn = ({ authState: { isAuthenticated }, signInUser, ...rest }) => {
 						value={userInput.email}
 						autoComplete='email'
 						autoFocus
+						error={wrongUserInput.email}
 					/>
 					<TextField
 						variant='outlined'
