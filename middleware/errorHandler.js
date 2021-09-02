@@ -64,6 +64,6 @@ module.exports = (err, req, res, next) => {
 
 	return res.status(error.statusCode || 500).json({
 		success: false,
-		error: error.message.trim() || 'Server Error',
+		message: error.message.trim() || 'Server Error! Please try again after sometimes',
 	});
 };
