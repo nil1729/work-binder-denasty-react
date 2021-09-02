@@ -39,7 +39,12 @@ app.use(errorHandler);
 // Serve "Public" folder as a static directory
 app.use(express.static(__dirname + '/public'));
 
-// Show Documentation for this API
+// Frontend
+if (process.env.NODE_ENV === 'production') {
+	app.get('*', (req, res) => {
+		res.sendFile(path.resolve(__dirname, 'public', 'webpage', 'index.html'));
+	});
+}
 
 // PORT Setup and Server Setup on PORT
 const PORT = process.env.PORT || 5050;
