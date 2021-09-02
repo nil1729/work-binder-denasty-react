@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "8px 20px",
     fontWeight: "300",
     width: "100%",
+    textDecoration: "none",
     "&:hover": {
       background: "#5b30a0",
       transition: "all 0.3s",
@@ -69,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
   },
 }));
-const SignIn = ({ authState: { isAuthenticated }, signInUser, ...rest }) => {
+const Forgot = ({ authState: { isAuthenticated }, signInUser, ...rest }) => {
   const classes = useStyles();
   const history = useHistory();
   const query = useQuery();
@@ -78,7 +79,7 @@ const SignIn = ({ authState: { isAuthenticated }, signInUser, ...rest }) => {
   const [submitted, setSubmitted] = useState(false);
   const [userInput, setUserInput] = useState({ email: "", password: "" });
   const [wrongUserInput, setWrongUserInput] = useState({ email: false });
-  const [attempt, setAttempt] = useState(0);
+  const [attempt, setAttempt] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -118,8 +119,8 @@ const SignIn = ({ authState: { isAuthenticated }, signInUser, ...rest }) => {
     setUserInput({ email: "", password: "" });
     const isSuccess = await signInUser(reqBody);
 
-    if (!isSuccess) {
-      setAttempt(attempt + 1);
+    if (isSuccess) {
+      setAttempt(true);
       setSubmitted(false);
     }
   };
@@ -140,75 +141,87 @@ const SignIn = ({ authState: { isAuthenticated }, signInUser, ...rest }) => {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div className={classes.paper}>
-        <Typography
-          component="h1"
-          variant="h5"
-          style={{
-            fontFamily: "Nunito Sans",
-            fontSize: "32px",
-            color: "#753eca",
-          }}
-        >
-          Sign in
-        </Typography>
-        <form className={classes.form} onSubmit={submitHandler}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            disabled={submitted}
-            name="email"
-            type="email"
-            onChange={onChange}
-            value={userInput.email}
-            autoComplete="email"
-            autoFocus
-            error={wrongUserInput.email}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            disabled={submitted}
-            name="password"
-            label="Password"
-            type="password"
-            onChange={onChange}
-            value={userInput.password}
-            id="password"
-            autoComplete="current-password"
-          />
-          <div className={classes.btn_container}>
-            <button
-              type="submit"
-              variant="contained"
-              className={classes.submit}
+      {attempt ? (
+        <div className={classes.paper}>
+          <Typography
+            component="h1"
+            variant="h5"
+            style={{
+              fontFamily: "Nunito Sans",
+              fontSize: "32px",
+              color: "#753eca",
+            }}
+          >
+            Forget Password
+          </Typography>
+          <Typography
+            component="p"
+            variant="h5"
+            style={{
+              fontFamily: "Nunito Sans",
+              fontSize: "22px",
+            }}
+          >
+            Enter Your Email Address
+          </Typography>
+
+          <form className={classes.form} onSubmit={submitHandler}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
               disabled={submitted}
-            >
-              {" "}
-              {submitted ? "Signing In ..." : "Sign In"}
-            </button>
-          </div>
-        </form>
-        {attempt > 0 ? (
-          <Grid container>
-            <Divider className={classes.my_divider} />
-            <Grid item xs>
-              <Link
-                to="/forgot_password"
-                className={classes.my_forgot_password}
+              name="email"
+              type="email"
+              onChange={onChange}
+              value={userInput.email}
+              autoComplete="email"
+              autoFocus
+              error={wrongUserInput.email}
+            />
+
+            <div className={classes.btn_container}>
+              <button
+                type="submit"
+                variant="contained"
+                className={classes.submit}
+                disabled={submitted}
               >
-                Forgot Password?
-              </Link>
-            </Grid>
-          </Grid>
-        ) : null}
-      </div>
+                {" "}
+                {submitted ? "Submitting..." : "Submit"}
+              </button>
+            </div>
+          </form>
+        </div>
+      ) : (
+        <div className={classes.paper}>
+          <Typography
+            component="p"
+            variant="h5"
+            style={{
+              fontFamily: "Nunito Sans",
+              fontSize: "18px",
+              marginBottom: "20px",
+              background: "#9f8cbd",
+              padding: "15px",
+              color: "#fff",
+            }}
+          >
+            If You provided a valid username and email address you will receive
+            a password reset email. If you don't receive an email, you will need
+            to try again. Also, please check your spam folder
+          </Typography>
+
+          <div className={classes.btn_container}>
+            <Link to="/login" className={classes.submit}>
+              Back To Sign In
+            </Link>
+          </div>
+        </div>
+      )}
     </Container>
   );
 };
@@ -217,4 +230,4 @@ const mapStateToProps = (state) => ({
   authState: state.AUTH_STATE,
 });
 
-export default connect(mapStateToProps, { signInUser })(SignIn);
+export default connect(mapStateToProps, { signInUser })(Forgot);
