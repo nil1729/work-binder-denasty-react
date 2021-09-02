@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../components/Users/index.module.scss';
-
+import { Backdrop, Fade, Modal } from "@material-ui/core";
 import UserIcon from '../components/Users/assets/user-icon.svg';
 import EditIcon from '../components/Users/assets/pencil-icon.svg';
 import CrossIcon from '../components/Users/assets/cross-icon.svg';
 import UserAddIcon from '../components/Users/assets/user-add-icon.svg';
-
+import Search from "./Search";
 export default function Users() {
+	const [open, setOpen] = useState(false);
+
+	const handleOpen = () => {
+	  setOpen(true);
+	};
+  
+	const handleClose = () => {
+	  setOpen(false);
+	};
 	return (
 		<div className={styles.container}>
-			<div className={styles.header__stat}>
+		    <div className={styles.header__stat}>
 				<div className={styles.header__stat__container}>
 					<div className={styles.value__stat}>
 						<h4>give</h4>
@@ -65,13 +74,34 @@ export default function Users() {
 								</div>
 							</div>
 						</div>
-					) : (
-						<div className={`${styles.user__item} ${styles.blank__item}`} key={index}>
-							<img src={UserAddIcon} alt='' />
-						</div>
-					)
+					) :(
+						!open && (
+						  <div
+							className={`${styles.user__item} ${styles.blank__item}`}
+							key={index}
+							onClick={handleOpen}
+						  >
+							<img src={UserAddIcon} alt="" />
+						  </div>
+						)
+					  )
 				)}
 			</div>
+			<Modal
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={styles.form_wrapper}>
+            <Search handleClose={handleClose} />
+          </div>
+        </Fade>
+      </Modal>
 		</div>
 	);
 }

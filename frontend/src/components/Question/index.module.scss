@@ -48,7 +48,7 @@
 .sortable_container {
 	margin: auto;
 	display: flex;
-	width: 65%;
+	width: 100%;
 	position: relative;
 
 	.number_column {
@@ -124,9 +124,6 @@
 				user-select: none;
 			}
 		}
-	}
-	@media screen and (max-width: 600px) {
-		width: 100%;
 	}
 }
 

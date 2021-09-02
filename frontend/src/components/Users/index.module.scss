@@ -11,6 +11,18 @@
 		margin-top: 1.5rem;
 	}
 }
+.form_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  padding-top: 6%;
+  border: none;
+  @media (max-width: 700px) {
+    padding-top: 20%;
+  }
+}
 
 .header__stat {
 	width: 90%;

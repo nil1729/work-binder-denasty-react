@@ -282,8 +282,14 @@ const sendTokenResponseWithCookie = async (user, statusCode, res) => {
 		cookieOptions.secure = true;
 	}
 
-	res.status(statusCode).cookie('TOKEN', token, cookieOptions).json({
-		success: true,
-		token,
-	});
+	res
+		.status(statusCode)
+		.cookie('TOKEN', token, cookieOptions)
+		.json({
+			success: true,
+			responses: {
+				accessToken: token,
+				user: { username: user.username, name: user.name, email: user.email, userId: user._id },
+			},
+		});
 };
