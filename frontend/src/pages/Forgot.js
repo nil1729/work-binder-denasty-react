@@ -141,7 +141,7 @@ const Forgot = ({ authState: { isAuthenticated }, signInUser, ...rest }) => {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      {attempt ? (
+      {!attempt ? (
         <div className={classes.paper}>
           <Typography
             component="h1"
