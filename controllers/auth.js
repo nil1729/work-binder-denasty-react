@@ -201,6 +201,7 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 
 	// Mail Options
 	const options = setupForgotPasswordEmailTemplate(user, resetPasswordToken);
+	let msg;
 
 	// Sending Mail to User
 	// if (process.env.NODE_ENV === 'production') {
