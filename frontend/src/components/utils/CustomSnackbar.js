@@ -39,9 +39,14 @@ const CustomSnackbar = ({ alerts }) => {
 	return (
 		<div className={classes.root}>
 			{open && (
-				<Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+				<Snackbar
+					anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+					open={open}
+					autoHideDuration={6000}
+					onClose={handleClose}
+				>
 					{alerts.state && (
-						<Alert onClose={handleClose} severity={!alerts.state.success ? 'error' : 'success'}>
+						<Alert onClose={handleClose} severity={alerts.state.variant}>
 							{alerts.state.message}
 						</Alert>
 					)}

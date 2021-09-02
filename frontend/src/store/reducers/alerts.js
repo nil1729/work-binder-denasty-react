@@ -11,7 +11,6 @@ const alertReducers = (state = initialState, action) => {
 			return {
 				state: action.payload,
 			};
-
 		case CLEAR_ALERTS:
 			return initialState;
 		default:

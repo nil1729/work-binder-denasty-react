@@ -18,7 +18,9 @@ const loadUser = () => async (dispatch) => {
 		else return dispatch({ type: STOP_INITIAL_LOADER });
 
 		const res = await sendRequest.get('/auth/user');
-		dispatch({ type: LOAD_USER, payload: res.data });
+		if (res.data.success) {
+			dispatch({ type: LOAD_USER, payload: res.data.data });
+		}
 	} catch (e) {
 		setAuthToken();
 		dispatch({ type: AUTH_ERROR });
@@ -46,72 +48,18 @@ const signInUser =
 			dispatch({ type: SIGN_IN, payload: res.data });
 			dispatch({
 				type: ADD_ALERTS,
-				payload: { success: true, message: res.data.message },
-				// payload: res.data.responses.user.new_account
-				//   ? [
-				//       {
-				//         success: true,
-				//         message: res.data.message,
-				//       },
-				//       {
-				//         success: true,
-				//         message: "Kindly create your developer profile",
-				//       },
-				//     ]
-				//   : {
-				//       success: true,
-				//       message: res.data.message,
-				//     },
+				payload: { variant: 'success', message: 'Successfully signed in' },
 			});
-
 			return true;
 		} catch (e) {
 			console.log(e);
 			dispatch({
 				type: ADD_ALERTS,
-				payload: e.response && e.response.data,
+				payload: { variant: 'error', message: e.response && e.response.data.message },
 			});
 		}
 	};
 
-// Register a user (Email and Password)
-// const signUpUser =
-//   ({ name, email, password }) =>
-//   async (dispatch) => {
-//     try {
-//       const res = await sendRequest.post("/auth/register", {
-//         name,
-//         email,
-//         password,
-//       });
-//       setAuthToken(res.data.responses.accessToken);
-//       dispatch({ type: SIGN_UP, payload: res.data });
-//       dispatch({
-//         type: ADD_ALERTS,
-//         payload: res.data.responses.user.new_account
-//           ? [
-//               {
-//                 success: true,
-//                 message: res.data.message,
-//               },
-//               {
-//                 success: true,
-//                 message: "Kindly create your Blog ",
-//               },
-//             ]
-//           : {
-//               success: true,
-//               message: res.data.message,
-//             },
-//       });
-//       return true;
-//     } catch (e) {
-//       dispatch({
-//         type: ADD_ALERTS,
-//         payload: e.response && e.response.data,
-//       });
-//     }
-//   };
 const clearAlerts = () => async (dispatch) => {
 	dispatch({ type: CLEAR_ALERTS });
 };
@@ -119,13 +67,11 @@ const clearAlerts = () => async (dispatch) => {
 // logout user
 const logOut = () => async (dispatch) => {
 	setAuthToken();
-
-	// dispatch({ type: CLEAR_ALERTS });
 	dispatch({ type: LOG_OUT });
 	dispatch({
 		type: ADD_ALERTS,
-		payload: { success: true, message: 'Logout Success' },
+		payload: { message: 'Signed out successfully', variant: 'info' },
 	});
 };
 
-export { signInUser, logOut, clearAlerts };
+export { signInUser, logOut, clearAlerts, loadUser };

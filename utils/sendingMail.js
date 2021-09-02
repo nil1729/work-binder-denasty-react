@@ -13,4 +13,5 @@ const sendEmail = async (options) => {
 		throw new ErrorResponse('Please try again. There was an error while sending the email');
 	}
 };
+
 module.exports = sendEmail;

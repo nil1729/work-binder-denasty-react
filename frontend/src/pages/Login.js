@@ -114,7 +114,9 @@ const SignIn = ({ authState: { isAuthenticated }, signInUser, ...rest }) => {
 		if (!validateInput(userInput.email)) return setSubmitted(false);
 
 		// call redux action with data
-		const isSuccess = await signInUser(userInput);
+		let reqBody = userInput;
+		setUserInput({ email: '', password: '' });
+		const isSuccess = await signInUser(reqBody);
 
 		if (!isSuccess) {
 			setAttempt(attempt + 1);

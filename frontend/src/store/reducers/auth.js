@@ -1,6 +1,6 @@
 // Action Types
 
-import { SIGN_IN, LOG_OUT, AUTH_ERROR } from '../types';
+import { SIGN_IN, LOG_OUT, AUTH_ERROR, LOAD_USER, STOP_INITIAL_LOADER } from '../types';
 
 // Initial Auth State
 const initialState = {
@@ -20,6 +20,13 @@ const authReducers = (state = initialState, action) => {
 				isAuthenticated: true,
 				user: action.payload.responses.user,
 			};
+		case LOAD_USER:
+			return {
+				...state,
+				isAuthenticated: true,
+				loading: false,
+				user: action.payload,
+			};
 
 		case AUTH_ERROR:
 		case LOG_OUT:
@@ -30,7 +37,11 @@ const authReducers = (state = initialState, action) => {
 				loading: false,
 				user: null,
 			};
-
+		case STOP_INITIAL_LOADER:
+			return {
+				...state,
+				loading: false,
+			};
 		default: {
 			return state;
 		}

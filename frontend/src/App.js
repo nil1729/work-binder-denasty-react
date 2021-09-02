@@ -9,17 +9,27 @@ import Users from './pages/Users';
 import Question from './pages/Question';
 import Login from './pages/Login';
 import { connect } from 'react-redux';
-
 import PrivateRoute from './routing/PrivateRoute';
 import CustomSnackbar from './components/utils/CustomSnackbar';
-const App = ({ authState: { isAuthenticated } }) => {
+import PageLoader from './components/utils/FullPageLoader';
+
+import { loadUser } from './store/actions/auth';
+
+const App = ({ loadUser }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const toggle = () => {
 		setIsOpen(!isOpen);
 	};
 
+	// Call load user on first load
+	useEffect(() => {
+		loadUser();
+		//eslint-disable-next-line
+	}, []);
+
 	return (
 		<Router>
+			<PageLoader />
 			<Sidebar isOpen={isOpen} toggle={toggle} />
 			<Navbar toggle={toggle} openStatus={isOpen} />
 			<CustomSnackbar />
@@ -37,8 +47,5 @@ const App = ({ authState: { isAuthenticated } }) => {
 		</Router>
 	);
 };
-const mapStateToProps = (state) => ({
-	authState: state.AUTH_STATE,
-});
 
-export default connect(mapStateToProps)(App);
+export default connect(null, { loadUser })(App);
