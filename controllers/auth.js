@@ -214,7 +214,6 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 		success: true,
 		message: msg,
 		resetPasswordToken,
-		options,
 	});
 });
 
