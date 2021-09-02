@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
   },
 }));
-const SignIn = ({ authState: { isAuthenticated }, signInUser, ...rest }) => {
+const Reset = ({ authState: { isAuthenticated }, signInUser, ...rest }) => {
   const classes = useStyles();
   const history = useHistory();
   const query = useQuery();
@@ -111,17 +111,17 @@ const SignIn = ({ authState: { isAuthenticated }, signInUser, ...rest }) => {
     setSubmitted(true);
 
     // Validate email and password strength
-    if (!validateInput(userInput.email)) return setSubmitted(false);
+    // if (!validateInput(userInput.email)) return setSubmitted(false);
 
     // call redux action with data
-    let reqBody = userInput;
-    setUserInput({ email: "", password: "" });
-    const isSuccess = await signInUser(reqBody);
+    // let reqBody = userInput;
+    // setUserInput({ email: '', password: '' });
+    // const isSuccess = await signInUser(reqBody);
 
-    if (!isSuccess) {
-      setAttempt(attempt + 1);
-      setSubmitted(false);
-    }
+    // if (!isSuccess) {
+    // 	setAttempt(attempt + 1);
+    // 	setSubmitted(false);
+    // }
   };
 
   // validate input
@@ -150,25 +150,9 @@ const SignIn = ({ authState: { isAuthenticated }, signInUser, ...rest }) => {
             color: "#753eca",
           }}
         >
-          Sign in
+          Reset Password
         </Typography>
         <form className={classes.form} onSubmit={submitHandler}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            disabled={submitted}
-            name="email"
-            type="email"
-            onChange={onChange}
-            value={userInput.email}
-            autoComplete="email"
-            autoFocus
-            error={wrongUserInput.email}
-          />
           <TextField
             variant="outlined"
             margin="normal"
@@ -183,6 +167,20 @@ const SignIn = ({ authState: { isAuthenticated }, signInUser, ...rest }) => {
             id="password"
             autoComplete="current-password"
           />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            disabled={submitted}
+            name="conform_password"
+            label="Conform Password"
+            type="password"
+            onChange={onChange}
+            value={userInput.conform_password}
+            id="password"
+            autoComplete="current-password"
+          />
           <div className={classes.btn_container}>
             <button
               type="submit"
@@ -191,23 +189,10 @@ const SignIn = ({ authState: { isAuthenticated }, signInUser, ...rest }) => {
               disabled={submitted}
             >
               {" "}
-              {submitted ? "Signing In ..." : "Sign In"}
+              {submitted ? "Resetting  ..." : "Reset"}
             </button>
           </div>
         </form>
-        {attempt > 0 ? (
-          <Grid container>
-            <Divider className={classes.my_divider} />
-            <Grid item xs>
-              <Link
-                to="/forgot_password"
-                className={classes.my_forgot_password}
-              >
-                Forgot Password?
-              </Link>
-            </Grid>
-          </Grid>
-        ) : null}
       </div>
     </Container>
   );
@@ -217,4 +202,4 @@ const mapStateToProps = (state) => ({
   authState: state.AUTH_STATE,
 });
 
-export default connect(mapStateToProps, { signInUser })(SignIn);
+export default connect(mapStateToProps, { signInUser })(Reset);
