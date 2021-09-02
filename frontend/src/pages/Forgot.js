@@ -64,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
 		textDecoration: 'none',
 	},
 }));
+
 const Forgot = ({ forgotPasswordRequest, ...rest }) => {
 	const classes = useStyles();
 
