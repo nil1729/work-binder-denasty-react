@@ -32,6 +32,7 @@ app.use(cors());
 
 // Use Routes in app
 app.use('/api/v1/auth', require('./routes/auth'));
+app.use('/api/v1/blogs', require('./routes/blog'));
 
 // Error Handler Middleware
 app.use(errorHandler);

@@ -57,7 +57,7 @@ module.exports = (err, req, res, next) => {
 	}
 
 	// JWT Error
-	if (err.name === 'JsonWebTokenError') {
+	if (err.name === 'JsonWebTokenError' || err.name === 'TokenExpiredError') {
 		const message = `Session Expired. Please login again.`;
 		error = new ErrorResponse(message, 401);
 	}
