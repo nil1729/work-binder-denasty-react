@@ -66,7 +66,7 @@ exports.getAllBlogs = asyncHandler(async (req, res, next) => {
 		{
 			$project: {
 				title: 1,
-				preview: { $substr: ['$body', 0, 100] },
+				preview: { $substr: ['$body', 0, 250] },
 				previewId: '$slug',
 				coverPhotoURL: '$coverPhoto.publicURL',
 				id: '$_id',
@@ -81,7 +81,7 @@ exports.getAllBlogs = asyncHandler(async (req, res, next) => {
 			},
 		},
 		{
-			$sort: { createdAt: -1 },
+			$sort: { updatedAt: -1 },
 		},
 	];
 

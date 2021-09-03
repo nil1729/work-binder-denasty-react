@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	BlogContainer,
 	PageTitle,
@@ -12,38 +12,65 @@ import {
 	BlogItemTextPara,
 	ReadMoreBtnContainer,
 } from '../components/Blog/StyledComponents';
+import { connect } from 'react-redux';
+import { addAlert } from '../store/actions/alerts';
+import { getAllBlogs } from '../store/actions/blogs';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-const BlogItem = () => {
+function extractContent(s) {
+	var span = document.createElement('span');
+	span.innerHTML = s;
+	return span.textContent || span.innerText;
+}
+
+const BlogItem = ({ blogData }) => {
 	return (
 		<BlogItemContainer>
 			<BlogItemImageContainer>
-				<BlogItemImage src='https://images.ctfassets.net/59guugfpviax/3pXKlg1xSAf0zZw6XkaD6r/98f114dd7d99fa8a591a3241618adcd8/WhatsApp_Image_2020-04-07_at_16.49.45.jpeg?w=1400' />
+				<BlogItemImage src={blogData.coverPhotoURL} />
 			</BlogItemImageContainer>
 			<BlogItemTextContainer>
-				<BlogItemTitle>ALERT! KYLE SHANAHAN IS NOT A RB SAVIOR!</BlogItemTitle>
+				<BlogItemTitle>{blogData.title}</BlogItemTitle>
 				<BlogItemAuthor>
-					by <span>Mic Stulken</span>
+					by <span>{blogData.author_detail.name}</span>
 				</BlogItemAuthor>
-				<BlogItemTextPara>
-					Kyle Shanahan has been lauded as a ground game savant and one of the greatest offensive
-					minds in the NFL for the better part of the past decade. His success is most notably due
-					to…
-				</BlogItemTextPara>
+				<BlogItemTextPara>{extractContent(blogData.preview)}</BlogItemTextPara>
 				<ReadMoreBtnContainer>
-					<ReadMoreBtn>Read More</ReadMoreBtn>
+					<ReadMoreBtn to={`/blogs/${blogData.previewId}`}>Read More</ReadMoreBtn>
 				</ReadMoreBtnContainer>
 			</BlogItemTextContainer>
 		</BlogItemContainer>
 	);
 };
 
-export default function Blog() {
+function Blog({ getAllBlogs }) {
+	const [blogFetching, setBlogFetching] = useState(true);
+	const [blogList, setBlogList] = useState([]);
+
+	useEffect(() => {
+		setBlogFetching(true);
+		getAllBlogs()
+			.then((data) => {
+				setBlogFetching(false);
+				setBlogList(data.data);
+			})
+			.catch((err) => {
+				window.location.reload();
+			});
+	}, []);
+
 	return (
 		<BlogContainer>
 			<PageTitle>BLOG</PageTitle>
-			{[1, 3, 4, 5, 1].map((it, index) => (
-				<BlogItem key={index} />
-			))}
+			{blogFetching ? (
+				<PageTitle>
+					<CircularProgress size={60} />
+				</PageTitle>
+			) : (
+				blogList.map((item) => <BlogItem key={item.id} blogData={item} />)
+			)}
 		</BlogContainer>
 	);
 }
+
+export default connect(null, { addAlert, getAllBlogs })(Blog);

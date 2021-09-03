@@ -48,7 +48,7 @@ const App = ({ loadUser }) => {
 				<Route exact path='/reset_password' component={Reset}></Route>
 				<Redirect from='/logout' to='/login' />
 				<PrivateRoute exact path='/dashboard' component={Home} />
-				<PrivateRoute exact path='/text_editor' component={TextEditor}></PrivateRoute>
+				<PrivateRoute exact path='/create_blog' component={TextEditor}></PrivateRoute>
 			</Switch>
 		</Router>
 	);

@@ -20,6 +20,7 @@ import styles from '../components/TextEditor/index.module.scss';
 import { DropzoneArea } from 'material-ui-dropzone';
 import AddPhotoAlternateOutlinedIcon from '@material-ui/icons/AddPhotoAlternateOutlined';
 import { addAlert } from '../store/actions/alerts';
+import { createNewBlog } from '../store/actions/blogs';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -63,7 +64,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const TextEditor = ({ addAlert }) => {
+const TextEditor = ({ addAlert, createNewBlog }) => {
+	const history = useHistory();
 	const classes = useStyles();
 	//   const [array, setArray] = useState("");
 	const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
@@ -106,8 +108,12 @@ const TextEditor = ({ addAlert }) => {
 		}
 
 		// call redux action with data
-
-		setSubmitted(false);
+		const isSuccess = await createNewBlog(userInput.blog_title, blogBody, blogCoverPhoto);
+		if (isSuccess) {
+			return history.push('/blogs');
+		} else {
+			setSubmitted(false);
+		}
 	};
 
 	const handleEditorChange = (state) => {
@@ -165,7 +171,7 @@ const TextEditor = ({ addAlert }) => {
 					<DropzoneArea
 						onChange={handleFiles}
 						filesLimit={1}
-						acceptedFiles={['image/*']}
+						acceptedFiles={['image/jpeg', 'image/jpg', 'image/png']}
 						dropzoneText='Drag and Drop an Image'
 						dropzoneParagraphClass='dropzone_text'
 						Icon={AddPhotoAlternateOutlinedIcon}
@@ -187,4 +193,4 @@ const TextEditor = ({ addAlert }) => {
 	);
 };
 
-export default connect(null, { addAlert })(TextEditor);
+export default connect(null, { addAlert, createNewBlog })(TextEditor);
