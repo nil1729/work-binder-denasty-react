@@ -7,7 +7,7 @@ const { protectRoute } = require('../middleware/protectRoutes');
 
 // Import Controllers
 
-const { createBlog, getAllBlogs } = require('../controllers/blog');
+const { createBlog, getAllBlogs, getBlogById } = require('../controllers/blog');
 const { uploadFile, removeFile } = require('../controllers/firebaseStorage');
 
 router
@@ -15,4 +15,5 @@ router
 	.post(protectRoute, multerUpload, uploadFile, createBlog, removeFile)
 	.get(getAllBlogs);
 
+router.route('/:previewId').get(getBlogById);
 module.exports = router;

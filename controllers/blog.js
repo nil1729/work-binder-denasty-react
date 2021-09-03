@@ -66,7 +66,7 @@ exports.getAllBlogs = asyncHandler(async (req, res, next) => {
 		{
 			$project: {
 				title: 1,
-				preview: { $substr: ['$body', 0, 250] },
+				preview: { $concat: [{ $substr: ['$body', 0, 250] }, '......'] },
 				previewId: '$slug',
 				coverPhotoURL: '$coverPhoto.publicURL',
 				id: '$_id',
@@ -132,4 +132,19 @@ exports.getAllBlogs = asyncHandler(async (req, res, next) => {
 
 	let output = await Blog.aggregate(queryArr);
 	return res.status(200).json(output[0]);
+});
+
+exports.getBlogById = asyncHandler(async (req, res, next) => {
+	const { previewId } = req.params;
+
+	const blog = await Blog.findOne({ slug: previewId }).populate({
+		path: 'user',
+		select: 'name email',
+	});
+	if (!blog) throw new ErrorResponse(`Requested Blog post not found`, 404);
+
+	return res.status(200).json({
+		success: true,
+		data: blog,
+	});
 });
