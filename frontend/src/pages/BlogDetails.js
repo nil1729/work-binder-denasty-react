@@ -11,6 +11,7 @@ import {
   BlogItemTextPara,
   BlogItemImageTextContainer,
   BlogItemImageText,
+  BlogItemImageWrapper,
 } from "../components/BlogDetails/StyledComponents";
 import { connect } from "react-redux";
 import { addAlert } from "../store/actions/alerts";
@@ -18,6 +19,7 @@ import { getBlog } from "../store/actions/blogs";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useParams } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+
 function Blog({ getBlog }) {
   const [blogFetching, setBlogFetching] = useState(true);
   const [blogDatas, setBlogDatas] = useState({});
@@ -26,16 +28,18 @@ function Blog({ getBlog }) {
   console.log(id);
   useEffect(() => {
     getBlog(id).then((data) => {
-      console.log(data);
+      console.log(data.data.body);
       setBlogFetching(false);
       setBlogDatas(data.data);
     });
   }, [id]);
 
   function extractContent(s) {
-    var span = document.createElement("span");
-    span.innerHTML = s;
-    return span.textContent || span.innerText;
+    // var span = document.createElement("span");
+    // // span.innerHTML = s;
+    // span.dangerouslySetInnerHTML = { __html: s };
+    // return span.textContent || span.innerHTML;
+    return { __html: `${s}` };
   }
 
   const BlogItem = () => {
@@ -46,7 +50,9 @@ function Blog({ getBlog }) {
           by <span>{user.name}</span>
         </BlogItemAuthor>
         <BlogItemImageContainer>
-          <BlogItemImage src={coverPhoto.publicURL} />
+          <BlogItemImageWrapper>
+            <BlogItemImage src={coverPhoto.publicURL} />
+          </BlogItemImageWrapper>
           {/* <LazyLoadImage
                 src={coverPhoto.publicURL}
                 width="100%"
@@ -58,7 +64,9 @@ function Blog({ getBlog }) {
           </BlogItemImageTextContainer>
         </BlogItemImageContainer>
         <BlogItemTextContainer>
-          <BlogItemTextPara>{extractContent(body)}</BlogItemTextPara>
+          <BlogItemTextPara
+            dangerouslySetInnerHTML={extractContent(body)}
+          ></BlogItemTextPara>
         </BlogItemTextContainer>
       </BlogItemContainer>
     );
@@ -72,8 +80,6 @@ function Blog({ getBlog }) {
         </PageTitle>
       ) : (
         <BlogItem />
-        // blogList.map((item) => <BlogItem key={item.id} blogData={item} />)
-        // <BlogItem blogData={blogList}/>
       )}
     </BlogContainer>
   );

@@ -10,6 +10,14 @@ export const BlogContainer = styled.div`
     width: 95%;
     margin-top: 1.5rem;
   }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #753eca;
+  }
 `;
 
 export const PageTitle = styled.h1`
@@ -42,6 +50,7 @@ export const BlogItemContainer = styled.div`
 export const BlogItemImage = styled.img`
   height: 100%;
   width: 100%;
+  object-fit: contain;
 `;
 
 export const BlogItemTextContainer = styled.div`
@@ -56,29 +65,30 @@ export const BlogItemImageContainer = styled.div`
   height: 100%;
   width: 100%;
 `;
+export const BlogItemImageWrapper = styled.div`
+  height: 500px;
+`;
 
 export const BlogItemTitle = styled.h1`
   font-size: 30px;
   font-weight: 500;
-  color: #242629;
+
   font-family: "Nunito Sans", sans-serif;
-  line-height: 36px;
-  letter-spacing: -16;
+  line-height: 30px;
   @media (max-width: 600px) {
     font-size: 30px;
-    line-height: 36px;
+    line-height: 27px;
   }
 `;
 
-export const BlogItemAuthor = styled.h6`
+export const BlogItemAuthor = styled.p`
   font-size: 14px;
   font-weight: 300;
-  color: #242629;
+  color: black;
   font-family: "Nunito Sans", sans-serif;
   margin-bottom: 10px;
   span {
     color: #753eca;
-    letter-spacing: -35;
   }
 `;
 
@@ -91,6 +101,26 @@ export const BlogItemTextPara = styled.p`
   @media (max-width: 600px) {
     margin-bottom: 25px;
   }
+  h1 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 26px;
+
+    font-weight: 500;
+  }
+  h3 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: 500;
+  }
+  h2 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 23px;
+    font-weight: 500;
+    color: #242629;
+  }
 `;
 export const BlogItemImageTextContainer = styled.div`
   width: 100%;
@@ -99,15 +129,15 @@ export const BlogItemImageTextContainer = styled.div`
   align-items: center;
 `;
 
-export const BlogItemImageText = styled.p`
+export const BlogItemImageText = styled.div`
   widdth: 80%;
   font-size: 15px;
   color: #242629;
+  line-height: 26px;
   opacity: 40%;
   text-align: center;
   flex-wrap: wrap;
   margin: 10px auto;
-  padding: 5px 20px;
-  padding-top: 0;
+  padding: 0 20px;
   font-family: "Nunito Sans", sans-serif;
 `;
