@@ -1,27 +1,27 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 .container {
-	text-align: center;
-	background-color: #fff;
-	max-width: 800px;
-	margin: 20px auto;
+  text-align: center;
+  background-color: #fff;
+  max-width: 800px;
+  margin: 20px auto;
 }
 .wrapper_class {
-	padding: 1rem;
-	border: 1px solid #ccc;
+  padding: 1rem;
+  border: 1px solid #ccc;
 }
 .editor_class {
-	background-color: #fff;
-	color: black;
-	padding: 0px 0.5rem;
-	min-height: 200px;
-	border: 1px solid #ccc;
+  background-color: #fff;
+  color: black;
+  padding: 0px 0.5rem;
+  min-height: 200px;
+  border: 1px solid #ccc;
 }
 .toolbar_class {
-	border: 1px solid #ccc;
-	background-color: #fff;
-	padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  padding: 10px;
 }
 .preview {
-	margin-top: 20px;
-	text-align: left;
+  margin-top: 20px;
+  text-align: left;
 }
