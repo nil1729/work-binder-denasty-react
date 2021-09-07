@@ -7,7 +7,7 @@ const { protectRoute } = require('../middleware/protectRoutes');
 
 // Import Controllers
 
-const { createBlog, getAllBlogs, getBlogById } = require('../controllers/blog');
+const { createBlog, getAllBlogs, getBlogById, getBlogsByAuthor } = require('../controllers/blog');
 const { uploadFile, removeFile } = require('../controllers/firebaseStorage');
 
 router
@@ -16,4 +16,6 @@ router
 	.get(getAllBlogs);
 
 router.route('/:previewId').get(getBlogById);
+router.route('/author_only').get(protectRoute, getBlogsByAuthor);
+
 module.exports = router;
