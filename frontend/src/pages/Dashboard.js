@@ -1,17 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { addAlert } from '../store/actions/alerts';
-import { getAuthorOnlyBlogs } from '../store/actions/blogs';
+import { getAuthorOnlyBlogs, deleteBlogPost } from '../store/actions/blogs';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import TextsmsOutlinedIcon from '@material-ui/icons/TextsmsOutlined';
+import CommentIcon from '@material-ui/icons/Comment';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Container from '@material-ui/core/Container';
+import moment from 'moment';
 import {
 	PostsContainer,
+	IconWrapper,
+	LeftIcons,
+	RightIcons,
+	DashBoardHeader,
+	DashBoardHeaderTitle,
+	DashBoardTitle,
+	ReadMoreBtnContainer,
+} from '../components/Dashboard/styledComponents';
+
+import {
+	BlogContainer,
 	PageTitle,
 	BlogItemContainer,
 	BlogItemImage,
@@ -20,15 +32,8 @@ import {
 	BlogItemTitle,
 	BlogItemAuthor,
 	ReadMoreBtn,
-	IconWrapper,
-	LeftIcons,
-	RightIcons,
-	DashBoardHeader,
 	BlogItemTextPara,
-	DashBoardHeaderTitle,
-	DashBoardTitle,
-	ReadMoreBtnContainer,
-} from '../components/Dashboard/styledComponents';
+} from '../components/Blog/StyledComponents';
 
 function extractContent(s) {
 	var span = document.createElement('span');
@@ -36,7 +41,7 @@ function extractContent(s) {
 	return span.textContent || span.innerText;
 }
 
-const BlogItem = ({ blogData }) => {
+const BlogItem = ({ blogData, deletePost }) => {
 	return (
 		<BlogItemContainer>
 			<BlogItemImageContainer>
@@ -44,35 +49,30 @@ const BlogItem = ({ blogData }) => {
 				<LazyLoadImage src={blogData.coverPhotoURL} width={'100%'} height={'100%'} effect='blur' />
 			</BlogItemImageContainer>
 			<BlogItemTextContainer>
-				<BlogItemTitle>
-					{blogData.title}
-					<BlogItemAuthor>date</BlogItemAuthor>
-				</BlogItemTitle>
-
-				<IconWrapper>
-					<LeftIcons>
-						<FavoriteBorderIcon style={{ color: 'red', cursor: 'pointer' }} />
-						<span style={{ marginRight: '15px' }}>13213</span>
-						<TextsmsOutlinedIcon style={{ color: 'blue', cursor: 'pointer' }} />
-						<span>13213</span>
-					</LeftIcons>
-					<RightIcons>
-						<EditIcon
-							style={{
-								color: 'orange',
-								cursor: 'pointer',
-								marginRight: '15px',
+				<BlogItemTitle>{blogData.title}</BlogItemTitle>
+				<BlogItemAuthor>
+					Published at <span>{moment(blogData.createdAt).format('Do MMM YYYY')}</span>
+				</BlogItemAuthor>
+				<BlogItemTextPara>{extractContent(blogData.preview)}</BlogItemTextPara>
+				<ReadMoreBtnContainer>
+					<ReadMoreBtn to={`/blogs/${blogData.previewId}`}>View</ReadMoreBtn>
+					<IconWrapper>
+						<CommentIcon color='primary' />
+						<DeleteIcon
+							color='error'
+							style={{ marginLeft: '1.5rem' }}
+							onClick={() => {
+								deletePost(blogData.id);
 							}}
 						/>
-						<DeleteIcon style={{ color: 'red', cursor: 'pointer' }} />
-					</RightIcons>
-				</IconWrapper>
+					</IconWrapper>
+				</ReadMoreBtnContainer>
 			</BlogItemTextContainer>
 		</BlogItemContainer>
 	);
 };
 
-function Dashboard({ getAuthorOnlyBlogs }) {
+function Dashboard({ getAuthorOnlyBlogs, authState, deleteBlogPost }) {
 	const [blogFetching, setBlogFetching] = useState(true);
 	const [blogList, setBlogList] = useState([]);
 
@@ -88,30 +88,38 @@ function Dashboard({ getAuthorOnlyBlogs }) {
 			});
 	}, []);
 
+	const deletePost = async (id) => {
+		// remove the item from the current list of the App State
+		// Then Call the redux to remove that item from the database
+		/* await deleteBlogPost(id); */
+		// Show a Alert to the user
+	};
+
 	return (
 		<PostsContainer>
 			<DashBoardHeader>
-				<div>
-					<DashBoardHeaderTitle>Hello User</DashBoardHeaderTitle>
-					<BlogItemAuthor>how is today?</BlogItemAuthor>
-				</div>
+				<DashBoardHeaderTitle>
+					Hello, {authState.user && authState.user.name.split(' ')[0]}
+				</DashBoardHeaderTitle>
 				<ReadMoreBtnContainer>
-					<ReadMoreBtn to={`/Create_blog`}>Post</ReadMoreBtn>
+					<ReadMoreBtn to={`/Create_blog`}>Create New Post</ReadMoreBtn>
 				</ReadMoreBtnContainer>
 			</DashBoardHeader>
-			<div>
-				<DashBoardTitle>Active Posts</DashBoardTitle>
-			</div>
+			<PageTitle>Active Posts</PageTitle>
 
 			{blogFetching ? (
 				<PageTitle>
 					<CircularProgress size={60} />
 				</PageTitle>
 			) : (
-				blogList.map((item) => <BlogItem key={item.id} blogData={item} />)
+				blogList.map((item) => <BlogItem key={item.id} blogData={item} deletePost={deletePost} />)
 			)}
 		</PostsContainer>
 	);
 }
-
-export default connect(null, { addAlert, getAuthorOnlyBlogs })(Dashboard);
+const mapStateToProps = (state) => ({
+	authState: state.AUTH_STATE,
+});
+export default connect(mapStateToProps, { addAlert, getAuthorOnlyBlogs, deleteBlogPost })(
+	Dashboard
+);

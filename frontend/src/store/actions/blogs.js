@@ -15,7 +15,7 @@ const createNewBlog = (title, body, coverPhoto) => async (dispatch) => {
 					variant: 'warning',
 				},
 			});
-			return window.location.reload();
+			return;
 		}
 
 		let formData = new FormData();
@@ -54,14 +54,51 @@ const getAuthorOnlyBlogs = () => async (dispatch) => {
 					variant: 'warning',
 				},
 			});
-			return window.location.reload();
+			return;
 		}
-		const res = await sendRequest.get(`/blogs/author_only`);
+		const res = await sendRequest.get(`/blogs/my/author_only`);
 		return res.data;
 	} catch (e) {
 		console.log(e);
 	}
 };
+
+const deleteBlogPost = (id) => async (dispatch) => {
+	try {
+		let accessToken = localStorage.getItem('ACCESS_TOKEN');
+		if (accessToken) setAuthToken(accessToken);
+		else {
+			dispatch({
+				type: ADD_ALERTS,
+				payload: {
+					message: 'Kindly login again. Session Expired!',
+					variant: 'warning',
+				},
+			});
+			return;
+		}
+		const res = await sendRequest.delete(`/blogs/my/author_only/${id}`);
+		console.log(res);
+	} catch (e) {
+		console.log(e);
+	}
+};
+
+const addComment =
+	({ name, emailAddress, websiteURL, bodyText, blogID }) =>
+	async (dispatch) => {
+		try {
+			const res = await sendRequest.post(`/blogs/comments/${blogID}`, {
+				name,
+				email: emailAddress,
+				websiteURL,
+				commentText: bodyText,
+			});
+			// Show Alerts
+		} catch (e) {
+			console.log(e);
+		}
+	};
 
 const getBlog = (id) => async (dispatch) => {
 	try {
@@ -72,4 +109,4 @@ const getBlog = (id) => async (dispatch) => {
 	}
 };
 
-export { createNewBlog, getAllBlogs, getBlog, getAuthorOnlyBlogs };
+export { createNewBlog, getAllBlogs, getBlog, getAuthorOnlyBlogs, deleteBlogPost, addComment };

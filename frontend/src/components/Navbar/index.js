@@ -45,9 +45,7 @@ const Navbar = ({ toggle, openStatus, authState: { isAuthenticated }, logOut }) 
 							{!isAuthenticated ? (
 								<NavLinks to='/login'>LOGIN</NavLinks>
 							) : (
-								<NavLinks to='/logout' onClick={logOut}>
-									LOGOUT
-								</NavLinks>
+								<NavLinks to='/dashboard'>DASHBOARD</NavLinks>
 							)}
 						</NavItem>
 					</NavMenu>

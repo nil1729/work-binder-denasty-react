@@ -25,6 +25,29 @@ const BlogSchema = new mongoose.Schema(
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',
 		},
+		comments: [
+			{
+				fullName: {
+					type: mongoose.Schema.Types.String,
+					required: true,
+				},
+				email: {
+					type: mongoose.Schema.Types.String,
+					required: true,
+				},
+				text: {
+					type: mongoose.Schema.Types.String,
+					required: true,
+				},
+				websiteURL: {
+					type: mongoose.Schema.Types.String,
+				},
+				timestamp: {
+					type: mongoose.Schema.Types.Date,
+					default: Date.now,
+				},
+			},
+		],
 	},
 	{ timestamps: true }
 );

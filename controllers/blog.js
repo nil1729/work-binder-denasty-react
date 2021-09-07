@@ -154,28 +154,7 @@ exports.getBlogsByAuthor = asyncHandler(async (req, res, next) => {
 
 	let queryArr = [
 		{
-			$match: { _id: { $exists: true }, user: req.user.id },
-		},
-		{
-			$lookup: {
-				from: 'users',
-				let: { userId: '$user' },
-				pipeline: [
-					{
-						$match: {
-							$expr: {
-								$and: [{ $eq: ['$_id', '$$userId'] }],
-							},
-						},
-					},
-					{
-						$project: {
-							name: 1,
-						},
-					},
-				],
-				as: 'author_detail',
-			},
+			$match: { _id: { $exists: true }, user: ObjectId(req.user._id) },
 		},
 		{
 			$sort: { createdAt: -1 },
@@ -187,14 +166,8 @@ exports.getBlogsByAuthor = asyncHandler(async (req, res, next) => {
 				previewId: '$slug',
 				coverPhotoURL: '$coverPhoto.publicURL',
 				id: '$_id',
+				createdAt: 1,
 				_id: 0,
-				author_detail: {
-					$cond: {
-						if: { $isArray: '$author_detail' },
-						then: { $first: '$author_detail' },
-						else: 'NA',
-					},
-				},
 			},
 		},
 	];
@@ -246,4 +219,39 @@ exports.getBlogsByAuthor = asyncHandler(async (req, res, next) => {
 
 	let output = await Blog.aggregate(queryArr);
 	return res.status(200).json(output[0]);
+});
+
+exports.deleteBlogPost = asyncHandler(async (req, res, next) => {
+	const { blogId } = req.params;
+	await Blog.deleteOne({ _id: ObjectId(blogId) });
+
+	return res.status(200).json({
+		success: true,
+		message: 'Blog post deleted successfully',
+	});
+});
+
+exports.addComment = asyncHandler(async (req, res, next) => {
+	const { blogId } = req.params;
+	const { name, email, commentText, websiteURL } = req.body;
+
+	const blog = await Blog.findById(blogId);
+	if (!blog) throw new ErrorResponse(`Blog post not found`, 404);
+
+	if (!name || !email || !commentText)
+		throw new ErrorResponse(`Please fill all the required fields`, 400);
+
+	const commentObj = {
+		fullName: name,
+		email: email,
+		text: commentText,
+		websiteURL: websiteURL,
+	};
+
+	await Blog.updateOne({ _id: ObjectId(blogId) }, { $push: { comments: commentObj } });
+
+	return res.status(200).json({
+		success: true,
+		data: commentObj,
+	});
 });

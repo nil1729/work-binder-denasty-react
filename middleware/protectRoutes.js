@@ -4,6 +4,7 @@ const asyncHandler = require('./asyncHandler');
 
 // import Models
 const User = require('../models/User');
+const Blog = require('../models/Blog');
 
 exports.protectRoute = asyncHandler(async (req, res, next) => {
 	let token;
@@ -40,6 +41,24 @@ exports.protectRoute = asyncHandler(async (req, res, next) => {
 
 	// set user object to the request
 	req.user = user;
+
+	next();
+});
+
+exports.authorizeBlogOps = asyncHandler(async (req, res, next) => {
+	const { blogId } = req.params;
+	const { user } = req;
+
+	// Find blog by id
+	const blog = await Blog.findById(blogId);
+
+	if (!blog) {
+		throw new ErrorResponse(`Blog with id ${blogId} not found`, 404);
+	}
+
+	if (blog.user.toString() !== user._id.toString()) {
+		throw new ErrorResponse(`You are not authorized to access this resource`, 401);
+	}
 
 	next();
 });
