@@ -87,7 +87,7 @@ const SignIn = ({ authState: { isAuthenticated }, signInUser, ...rest }) => {
 				history.push(query.get('redirect'));
 				return;
 			}
-			history.push('/create_blog');
+			history.push('/dashboard');
 		}
 		// eslint-disable-next-line
 	}, [isAuthenticated]);
