@@ -149,12 +149,12 @@ exports.getBlogById = asyncHandler(async (req, res, next) => {
 	});
 });
 
-exporst.getBlogsByAuthor = asyncHandler(async (req, res, next) => {
+exports.getBlogsByAuthor = asyncHandler(async (req, res, next) => {
 	const { limit, page, sort, order, search } = req.query;
 
 	let queryArr = [
 		{
-			$match: { _id: { $exists: true } },
+			$match: { _id: { $exists: true }, user: req.user.id },
 		},
 		{
 			$lookup: {
