@@ -9,6 +9,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import TextsmsOutlinedIcon from "@material-ui/icons/TextsmsOutlined";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import Container from "@material-ui/core/Container";
 import {
   PostsContainer,
   PageTitle,
@@ -24,9 +25,11 @@ import {
   RightIcons,
   DashBoardHeader,
   BlogItemTextPara,
+  DashBoardHeaderTitle,
+  DashBoardTitle,
   ReadMoreBtnContainer,
 } from "../components/Dashboard/styledComponents";
-import ReplyForm from "../components/Dashboard/ReplyForm";
+
 function extractContent(s) {
   var span = document.createElement("span");
   span.innerHTML = s;
@@ -91,34 +94,28 @@ function Dashboard({ getAllBlogs }) {
   }, []);
 
   return (
-    <div>
+    <PostsContainer>
       <DashBoardHeader>
         <div>
-          <h1 style={{ margin: "0" }}>Hello User</h1>
+          <DashBoardHeaderTitle>Hello User</DashBoardHeaderTitle>
           <BlogItemAuthor>how is today?</BlogItemAuthor>
         </div>
         <ReadMoreBtnContainer>
           <ReadMoreBtn to={`/Create_blog`}>Post</ReadMoreBtn>
         </ReadMoreBtnContainer>
       </DashBoardHeader>
-      <PostsContainer>
-        <div>
-          <h2 style={{ marin: "15px 0" }}>Active Posts</h2>
-        </div>
+      <div>
+        <DashBoardTitle>Active Posts</DashBoardTitle>
+      </div>
 
-        {blogFetching ? (
-          <PageTitle>
-            <CircularProgress size={60} />
-          </PageTitle>
-        ) : (
-          blogList.map((item) => <BlogItem key={item.id} blogData={item} />)
-        )}
-
-        <div>
-          <ReplyForm />
-        </div>
-      </PostsContainer>
-    </div>
+      {blogFetching ? (
+        <PageTitle>
+          <CircularProgress size={60} />
+        </PageTitle>
+      ) : (
+        blogList.map((item) => <BlogItem key={item.id} blogData={item} />)
+      )}
+    </PostsContainer>
   );
 }
 

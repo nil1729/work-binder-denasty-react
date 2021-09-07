@@ -19,7 +19,7 @@ import { getBlog } from "../store/actions/blogs";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useParams } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
+import ReplyForm from "./ReplyForm";
 function Blog({ getBlog }) {
   const [blogFetching, setBlogFetching] = useState(true);
   const [blogDatas, setBlogDatas] = useState({});
@@ -81,6 +81,9 @@ function Blog({ getBlog }) {
       ) : (
         <BlogItem />
       )}
+      <BlogItemContainer>
+        <ReplyForm />
+      </BlogItemContainer>
     </BlogContainer>
   );
 }
