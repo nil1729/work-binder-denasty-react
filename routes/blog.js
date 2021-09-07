@@ -16,6 +16,6 @@ router
 	.get(getAllBlogs);
 
 router.route('/:previewId').get(getBlogById);
-router.route('/author_only').get(protectRoute, getBlogsByAuthor);
+router.route('/my/author_only').get(protectRoute, getBlogsByAuthor);
 
 module.exports = router;
