@@ -21,14 +21,14 @@ const app = express();
 // Logging Middleware
 app.use(morgan('dev'));
 
+// Enable Cors
+app.use(cors());
+
 // Cookie Parser Middleware
 app.use(cookieParser());
 
 // Body Parser Setup
 app.use(express.json());
-
-// Enable Cors
-app.use(cors());
 
 // Use Routes in app
 app.use('/api/v1/auth', require('./routes/auth'));
