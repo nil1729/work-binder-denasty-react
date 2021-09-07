@@ -5,9 +5,8 @@ import { Link as LinkS } from "react-scroll";
 export const PostsContainer = styled.div`
   max-width: 900px;
   margin: auto;
-  margin-top: 3rem;
+  margin-top: 2rem;
   margin-bottom: 3rem;
-  padding: 20px;
   border-radius: 10px;
   box-sizing: border-box;
   @media (max-width: 600px) {
@@ -30,11 +29,25 @@ export const PageTitle = styled.h1`
 export const DashBoardHeader = styled.div`
   font-family: "Nunito Sans", sans-serif;
   display: flex;
-  margin: 1.5rem;
   justify-content: space-between;
   align-items: center;
   @media (max-width: 600px) {
+    width: 95%;
   }
+`;
+export const DashBoardHeaderTitle = styled.h1`
+  font-family: "Nunito Sans", sans-serif;
+  margin: 0;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 30px;
+`;
+export const DashBoardTitle = styled.h2`
+  font-family: "Nunito Sans", sans-serif;
+  margin: 20px auto;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 24px;
 `;
 
 export const BlogItemContainer = styled.div`
