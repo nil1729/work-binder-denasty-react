@@ -60,11 +60,12 @@ function Blog({ getAllBlogs }) {
     setBlogFetching(true);
     getAllBlogs()
       .then((data) => {
+        console.log(data);
         setBlogFetching(false);
         setBlogList(data.data);
       })
       .catch((err) => {
-        window.location.reload();
+        // window.location.reload();
       });
   }, []);
 
