@@ -23,6 +23,17 @@
 	}
 }
 
+.pagination_container {
+	margin-top: 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	& nav ul li button {
+		font-family: 'Nunito Sans', sans-serif !important;
+	}
+}
+
 .tab_btn_container {
 	font-family: 'Nunito Sans', sans-serif;
 	background-color: #f2f2f2;

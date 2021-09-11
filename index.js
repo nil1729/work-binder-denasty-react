@@ -33,6 +33,7 @@ app.use(express.json());
 // Use Routes in app
 app.use('/api/v1/auth', require('./routes/auth'));
 app.use('/api/v1/blogs', require('./routes/blog'));
+app.use('/api/v1/dynasty', require('./routes/dynasty-native'));
 
 // Error Handler Middleware
 app.use(errorHandler);

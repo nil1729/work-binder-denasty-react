@@ -14,3 +14,6 @@ export const CLEAR_ALERTS = 'CLEAR_ALERTS';
 export const GET_BLOGS_LIST = 'GET_BLOGS_LIST';
 export const GET_SINGLE_BLOG = 'GET_SINGLE_BLOG';
 export const CREATE_BLOG = 'CREATE_BLOG';
+
+// Dynasty Ops
+export const GET_PPR_RANKINGS = 'GET_PPR_RANKINGS';
