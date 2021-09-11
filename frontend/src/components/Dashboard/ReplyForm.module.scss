@@ -1,56 +1,61 @@
 .form {
-  max-width: 800px;
+	max-width: 800px;
 
-  font-family: "Nunito Sans";
+	font-family: 'Nunito Sans';
 }
 
 .comment_notes {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
+	font-family: 'Nunito Sans';
 }
 .comment_form_comment {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-  margin-right: 20px;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+	margin-right: 20px;
+	font-family: 'Nunito Sans';
 }
 .form_submit {
-  margin: 15px 0px;
-  display: flex;
-  justify-content: flex-end;
+	margin: 15px 0px;
+	display: flex;
+	justify-content: flex-end;
+	font-family: 'Nunito Sans';
 }
 .submit {
-  padding: 10px;
-  background: #753eca;
-  outline: none;
-  border: none;
-  color: #fff;
-  cursor: pointer;
+	padding: 10px;
+	background: #753eca;
+	outline: none;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	font-family: 'Nunito Sans';
 }
 .InputContainer {
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  @media screen and (min-width: 600px) {
-    flex-direction: row;
-  }
+	width: 90%;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	@media screen and (min-width: 600px) {
+		flex-direction: row;
+	}
 }
 .label {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
+	font-family: 'Nunito Sans';
 }
 .textarea {
-  min-width: 280px;
-  max-width: 280px;
-  min-height: 100px;
-  padding: 10px;
-  font-size: 16px;
-  font-family: "Nunito Sans";
-  @media screen and (min-width: 500px) {
-    min-width: 400px;
-    max-width: 400px;
-  }
-  @media screen and (min-width: 600px) {
-    min-width: 700px;
-    max-width: 700px;
-  }
+	min-width: 280px;
+	max-width: 280px;
+	min-height: 100px;
+	padding: 10px;
+	font-size: 16px;
+	font-family: 'Nunito Sans';
+	@media screen and (min-width: 500px) {
+		min-width: 400px;
+		max-width: 400px;
+	}
+	@media screen and (min-width: 600px) {
+		min-width: 700px;
+		max-width: 700px;
+	}
 }

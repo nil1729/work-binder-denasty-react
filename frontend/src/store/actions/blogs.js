@@ -85,16 +85,23 @@ const deleteBlogPost = (id) => async (dispatch) => {
 };
 
 const addComment =
-	({ name, emailAddress, websiteURL, bodyText, blogID }) =>
+	({ name, emailAddress, bodyText, blogID }) =>
 	async (dispatch) => {
 		try {
-			const res = await sendRequest.post(`/blogs/comments/${blogID}`, {
+			await sendRequest.post(`/blogs/comments/${blogID}`, {
 				name,
 				email: emailAddress,
-				websiteURL,
 				commentText: bodyText,
 			});
 			// Show Alerts
+			dispatch({
+				type: ADD_ALERTS,
+				payload: {
+					message: 'Thanks for your valuable feedback',
+					variant: 'success',
+				},
+			});
+			return true;
 		} catch (e) {
 			console.log(e);
 		}

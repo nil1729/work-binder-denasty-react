@@ -165,6 +165,7 @@ exports.getBlogsByAuthor = asyncHandler(async (req, res, next) => {
 				preview: { $concat: [{ $substr: ['$body', 0, 250] }, '......'] },
 				previewId: '$slug',
 				coverPhotoURL: '$coverPhoto.publicURL',
+				commentsCount: { $size: '$comments' },
 				id: '$_id',
 				createdAt: 1,
 				_id: 0,
