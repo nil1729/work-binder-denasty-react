@@ -24,6 +24,8 @@ import Reset from "./pages/Reset";
 import TextEditor from "./pages/TextEditor";
 import BlogDetails from "./pages/BlogDetails";
 import Dashboard from "./pages/Dashboard";
+import Trade from "./pages/Trade";
+import Trade2 from "./pages/Trade2";
 
 const App = ({ loadUser }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -57,6 +59,8 @@ const App = ({ loadUser }) => {
           path="/reset_password/:reset_token"
           component={Reset}
         ></Route>
+        <Route exact path="/trade-calculator" component={Trade}></Route>
+        <Route exact path="/trade2" component={Trade2}></Route>
         <Redirect from="/logout" to="/login" />
         <Route exact path="/blogs/:id" component={BlogDetails}></Route>
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
