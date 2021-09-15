@@ -5,5 +5,6 @@ const router = express.Router();
 const rankingRoutes = require('./rankings');
 
 router.use('/rankings', rankingRoutes);
+router.use('/list_players', require('./list_players'));
 
 module.exports = router;

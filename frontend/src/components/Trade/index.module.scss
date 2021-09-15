@@ -1,76 +1,75 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .container {
-  width: 90%;
-  margin: auto;
-  margin-top: 2rem;
-  @media (max-width: 600px) {
-    width: 95%;
-    margin-top: 1.5rem;
-  }
+	width: 90%;
+	margin: auto;
+	margin-top: 2rem;
+	@media (max-width: 600px) {
+		width: 95%;
+		margin-top: 1.5rem;
+	}
 }
 
 .page_title {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 30px;
-  font-weight: 500;
-  text-align: center;
-  //   color: #753eca;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  @media (max-width: 600px) {
-    font-size: 30px;
-  }
+	font-family: 'Nunito Sans', sans-serif;
+	font-size: 30px;
+	font-weight: 500;
+	text-align: center;
+	//   color: #753eca;
+	text-transform: uppercase;
+	margin-bottom: 1rem;
+	@media (max-width: 600px) {
+		font-size: 30px;
+	}
 }
 
 .tab_btn_container {
-  font-family: "Nunito Sans", sans-serif;
-  background-color: #000000;
-  color: #ffffff;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border-radius: 20px;
-  overflow: hidden;
-  width: 75%;
-  margin: 0 auto;
+	font-family: 'Nunito Sans', sans-serif;
+	background-color: #000000;
+	color: #ffffff;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	border-radius: 20px;
+	overflow: hidden;
+	width: 75%;
+	margin: 0 auto;
 
-  @media (max-width: 600px) {
-    width: 90%;
-  }
+	@media (max-width: 600px) {
+		width: 90%;
+	}
 }
 
 .tab_btn {
-  width: 100%;
-  text-align: center;
-  padding: 8px 0;
-  font-size: 17px;
-  border-radius: 20px;
-  cursor: pointer;
-  height: 100%;
+	width: 100%;
+	text-align: center;
+	padding: 8px 0;
+	font-size: 17px;
+	border-radius: 20px;
+	cursor: pointer;
+	height: 100%;
 }
 
 .wrapper {
-  margin-top: 15px;
-  margin-bottom: 15px;
-  & .tab_active {
-    background-color: $primary-color;
-    color: $primary-text-color;
-    transition: 0.25s ease-in-out;
-  }
+	margin-top: 15px;
+	margin-bottom: 15px;
+	& .tab_active {
+		background-color: $primary-color;
+		color: $primary-text-color;
+		transition: 0.25s ease-in-out;
+	}
 }
 .btn {
-  font-family: "Nunito Sans", sans-serif;
-  background-color: #753eca;
-  color: #ffffff;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 15px 20px;
-  margin: 15px auto;
-  border: none;
-  outline: none;
-  font-size: 17px;
-  cursor: pointer;
-  margin-bottom: 100px;
+	font-family: 'Nunito Sans', sans-serif;
+	background-color: #753eca;
+	color: #ffffff;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	padding: 10px 30px;
+	margin: 30px auto 50px;
+	border: none;
+	outline: none;
+	font-size: 17px;
+	cursor: pointer;
 }

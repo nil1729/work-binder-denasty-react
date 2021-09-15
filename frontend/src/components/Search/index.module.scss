@@ -1,140 +1,162 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .container {
-  position: relative;
-  background-color: #fff;
-  width: 800px;
-  margin: auto;
-  padding-top: 15px;
-  font-family: $primary-font;
-  overflow: hidden;
-  @media (max-width: 600px) {
-    width: 95%;
-    margin-top: 1.5rem;
-    margin-top: 10px;
-  }
+	position: relative;
+	background-color: #fff;
+	width: 800px;
+	margin: auto;
+	padding-top: 15px;
+	font-family: $primary-font;
+	overflow: hidden;
+	@media (max-width: 600px) {
+		width: 95%;
+		margin-top: 1.5rem;
+		margin-top: 10px;
+	}
+	max-height: 550px;
 }
 .cross__icon__container {
-  background-color: $primary-color;
-  border-radius: 50%;
-  height: 50px;
-  width: 50px;
-  position: absolute;
-  top: -2%;
-  right: -2%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 12px;
-  cursor: pointer;
-  img {
-    height: 15px;
-    margin-top: auto;
-  }
-  @media (max-width: 600px) {
-    top: -3%;
-    right: -3%;
-  }
+	background-color: $primary-color;
+	border-radius: 50%;
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	top: -2%;
+	right: -2%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	padding: 12px;
+	cursor: pointer;
+	img {
+		height: 15px;
+		margin-top: auto;
+	}
+	@media (max-width: 600px) {
+		top: -3%;
+		right: -3%;
+	}
 }
 .page_title {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 22px;
-  font-weight: 500;
-  text-align: center;
-  color: #242629;
-  margin-bottom: 1rem;
-  @media (max-width: 600px) {
-    font-size: 18px;
-  }
+	font-family: 'Nunito Sans', sans-serif;
+	font-size: 22px;
+	font-weight: 500;
+	text-align: center;
+	color: #242629;
+	margin-bottom: 1rem;
+	@media (max-width: 600px) {
+		font-size: 18px;
+	}
 }
 .tab_input_container {
-  font-family: "Nunito Sans", sans-serif;
-  background-color: #f2f2f2;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border-radius: 20px;
-  overflow: hidden;
-  width: 75%;
-  margin: 0 auto;
+	font-family: 'Nunito Sans', sans-serif;
+	background-color: #f2f2f2;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	border-radius: 20px;
+	overflow: hidden;
+	width: 75%;
+	margin: 0 auto;
 
-  @media (max-width: 600px) {
-    width: 90%;
-  }
+	@media (max-width: 600px) {
+		width: 90%;
+	}
 }
 .search__icon__container {
-  color: #000000;
-  opacity: 32%;
-  padding-top: 6px;
-  padding-bottom: 6px;
+	color: #000000;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	width: 90%;
 }
 .search__icon {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  & input {
-    border: none;
-    background-color: #f2f2f2;
-    margin-left: 20px;
-    font-size: 14px;
-  }
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	& input {
+		border: none;
+		background-color: #f2f2f2;
+		margin-left: 20px;
+		font-size: 15px;
+		width: 100%;
+		font-family: $primary-font;
+		outline: none;
+		color: #222020 !important;
+
+		&::placeholder {
+			/* Chrome, Firefox, Opera, Safari 10.1+ */
+			color: rgba(136, 130, 130, 0.76);
+			opacity: 1; /* Firefox */
+		}
+	}
 }
 
 .table {
-  width: 100%;
-  margin: 1rem auto;
+	width: 100%;
+	margin: 1rem auto;
+
+	.table__content {
+		// overflow-y: scroll;
+		max-height: 450px;
+		min-height: 450px;
+	}
 }
 
 .table__row {
-  display: flex;
-  width: 100%;
-  padding: 15px 0;
-  font-family: "Nunito Sans", sans-serif;
-  border-radius: 15px;
+	display: flex;
+	width: 100%;
+	padding: 15px 0;
+	font-family: 'Nunito Sans', sans-serif;
+	border-radius: 15px;
 
-  @media (max-width: 600px) {
-    padding: 10px 0;
-    & .table__data:nth-child(2) {
-      flex-basis: 40%;
-    }
-  }
+	&:hover {
+		background-color: #f2f2f2;
+		cursor: pointer;
+	}
+
+	@media (max-width: 600px) {
+		padding: 10px 0;
+		& .table__data:nth-child(2) {
+			flex-basis: 40%;
+		}
+	}
 }
 
 .table__data,
 .header__item {
-  flex: 1 1 20%;
-  text-align: center;
-  width: 100%;
+	flex: 1 1 20%;
+	text-align: center;
+	width: 100%;
 
-  &.name__column {
-    text-align: left;
-  }
+	&.name__column {
+		text-align: left;
+	}
 }
 
 .header__item {
-  text-transform: capitalize;
+	text-transform: capitalize;
 }
 
 .table__data.rank_index h3 {
-  font-size: 22px;
-  color: $primary-color;
-  font-weight: 700;
+	font-size: 22px;
+	color: $primary-color;
+	font-weight: 700;
 
-  @media (max-width: 600px) {
-    font-size: 18px;
-  }
+	@media (max-width: 600px) {
+		font-size: 18px;
+	}
 }
 
 .table__data {
-  font-size: 18px;
-  text-transform: capitalize;
+	font-size: 18px;
+	text-transform: capitalize;
 
-  @media (max-width: 600px) {
-    font-size: 15px;
-  }
+	@media (max-width: 600px) {
+		font-size: 15px;
+	}
 
-  &.uppercase {
-    text-transform: uppercase;
-    color: rgb(143, 136, 136);
-  }
+	&.uppercase {
+		text-transform: uppercase;
+		color: rgb(143, 136, 136);
+	}
 }

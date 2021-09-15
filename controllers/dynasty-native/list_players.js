@@ -7,9 +7,11 @@ const DEFAULT_LIMIT = Number(process.env.PAGE_LIMIT);
 const DEFAULT_PAGE = Number(process.env.PAGE_START);
 const { google } = require('googleapis');
 
-exports.getRankings = asyncHandler(async (req, res, next) => {
-	if (!['PPR', 'SF-TE-PREMIUM'].includes(req.params.ranking_type))
-		throw new ErrorResponse(`Invalid Ranking type: ${req.params.ranking_type}`, 400);
+exports.getPlayerList = asyncHandler(async (req, res, next) => {
+	if (!['STANDARD', 'SF-TE-PREMIUM'].includes(req.params.league_format))
+		throw new ErrorResponse(`Invalid Ranking type: ${req.params.league_format}`, 400);
+
+	let sheetName = req.params.league_format === 'STANDARD' ? 'PPR' : 'SF-TE-PREMIUM';
 
 	if (!req.GOOGLE_OAUTH_CREDENTIALS)
 		throw new ErrorResponse(`Error while retrieving data from source`, 500);
@@ -32,17 +34,18 @@ exports.getRankings = asyncHandler(async (req, res, next) => {
 
 	const resp = await sheets.spreadsheets.values.get({
 		spreadsheetId: process.env.SPREADSHEET_ID,
-		range: `${req.params.ranking_type}!A${startIndex}:F${endIndex}`,
+		range: `${sheetName}!A${startIndex}:F${endIndex}`,
 	});
 
 	if (resp.data.values) {
 		const playersRanks = [];
 		resp.data.values.forEach((player) => {
 			playersRanks.push({
-				name: player[1],
 				rank: player[0],
+				name: player[1],
 				team: player[2],
 				position: player[3],
+				value: player[4],
 			});
 		});
 		return res.status(200).json(playersRanks);

@@ -23,7 +23,7 @@ const Sidebar = ({ isOpen, toggle }) => {
 		},
 		{
 			title: 'trade calculator',
-			path: '/trade-calculator',
+			path: '/trade_calculator',
 		},
 		{
 			title: 'rankings',

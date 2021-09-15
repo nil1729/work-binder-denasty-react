@@ -36,7 +36,7 @@ const Navbar = ({ toggle, openStatus, authState: { isAuthenticated }, logOut }) 
 							<NavLinks to='/blog'>BLOG</NavLinks>
 						</NavItem>
 						<NavItem>
-							<NavLinks to='/trade-calculator'>TRADE CALCULATOR</NavLinks>
+							<NavLinks to='/trade_calculator'>TRADE CALCULATOR</NavLinks>
 						</NavItem>
 						<NavItem>
 							<NavLinks to='/rankings'>RANKINGS</NavLinks>
