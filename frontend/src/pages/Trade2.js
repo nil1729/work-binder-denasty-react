@@ -4,7 +4,12 @@ import PersonIcon from "@material-ui/icons/Person";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 import EditIcon from "@material-ui/icons/Edit";
+import Player from "../components/Trade2/player";
 function Trade2() {
+  const [showEditOption, setShowEditOption] = useState(false);
+  const showEdit = () => {
+    setShowEditOption(true);
+  };
   return (
     <div className={styles.container}>
       <div className={styles.left_column}>
@@ -17,86 +22,15 @@ function Trade2() {
           </div>
         </div>
         <div className={styles.grid_wrapper}>
-          <div className={styles.grid}>
-            <h4>ADD PLAYER/PICK</h4>
-            <div className={styles.grid_body}>
-              <div>
-                <PersonIcon className={styles.person_icon} />
-              </div>
-              <div>
-                <AddIcon className={styles.plus_icon} />
-                {/* <div className={styles.editable_component}>
-                  <p>VAL</p>
-                  <div>
-                    <CloseIcon />
-                    <EditIcon />
-                  </div>
-                </div> */}
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.grid}>
-            <h4>ADD PLAYER/PICK</h4>
-            <div className={styles.grid_body}>
-              <div>
-                <PersonIcon className={styles.person_icon} />
-              </div>
-              <div>
-                <AddIcon className={styles.plus_icon} />
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.grid}>
-            <h4>ADD PLAYER/PICK</h4>
-            <div className={styles.grid_body}>
-              <div>
-                <PersonIcon className={styles.person_icon} />
-              </div>
-              <div>
-                <AddIcon className={styles.plus_icon} />
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.grid}>
-            <h4>ADD PLAYER/PICK</h4>
-            <div className={styles.grid_body}>
-              <div>
-                <PersonIcon className={styles.person_icon} />
-              </div>
-              <div>
-                <AddIcon className={styles.plus_icon} />
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.grid}>
-            <h4>ADD PLAYER/PICK</h4>
-            <div className={styles.grid_body}>
-              <div>
-                <PersonIcon className={styles.person_icon} />
-              </div>
-              <div>
-                <AddIcon className={styles.plus_icon} />
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.grid}>
-            <h4>ADD PLAYER/PICK</h4>
-            <div className={styles.grid_body}>
-              <div>
-                <PersonIcon className={styles.person_icon} />
-              </div>
-              <div>
-                <AddIcon className={styles.plus_icon} />
-              </div>
-            </div>
-          </div>
+          <Player />
+          <Player />
+          <Player />
+          <Player />
+          <Player />
+          <Player />
         </div>
       </div>
+
       <div className={styles.right_column}>
         <h3>Receive</h3>
         <div className={styles.section_total}>
@@ -107,77 +41,12 @@ function Trade2() {
           </div>
         </div>
         <div className={styles.grid_wrapper}>
-          <div className={styles.grid}>
-            <h4>ADD PLAYER/PICK</h4>
-            <div className={styles.grid_body}>
-              <div>
-                <PersonIcon className={styles.person_icon} />
-              </div>
-              <div>
-                <AddIcon className={styles.plus_icon} />
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.grid}>
-            <h4>ADD PLAYER/PICK</h4>
-            <div className={styles.grid_body}>
-              <div>
-                <PersonIcon className={styles.person_icon} />
-              </div>
-              <div>
-                <AddIcon className={styles.plus_icon} />
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.grid}>
-            <h4>ADD PLAYER/PICK</h4>
-            <div className={styles.grid_body}>
-              <div>
-                <PersonIcon className={styles.person_icon} />
-              </div>
-              <div>
-                <AddIcon className={styles.plus_icon} />
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.grid}>
-            <h4>ADD PLAYER/PICK</h4>
-            <div className={styles.grid_body}>
-              <div>
-                <PersonIcon className={styles.person_icon} />
-              </div>
-              <div>
-                <AddIcon className={styles.plus_icon} />
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.grid}>
-            <h4>ADD PLAYER/PICK</h4>
-            <div className={styles.grid_body}>
-              <div>
-                <PersonIcon className={styles.person_icon} />
-              </div>
-              <div>
-                <AddIcon className={styles.plus_icon} />
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.grid}>
-            <h4>ADD PLAYER/PICK</h4>
-            <div className={styles.grid_body}>
-              <div>
-                <PersonIcon className={styles.person_icon} />
-              </div>
-              <div>
-                <AddIcon className={styles.plus_icon} />
-              </div>
-            </div>
-          </div>
+          <Player />
+          <Player />
+          <Player />
+          <Player />
+          <Player />
+          <Player />
         </div>
       </div>
     </div>
