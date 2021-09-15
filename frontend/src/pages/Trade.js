@@ -85,7 +85,9 @@ function Trade() {
           <div className={styles.tab_btn}>DYNASTY</div>
         </div>
       </div>
-      {size && settings && format && trade && type && <button>Next</button>}
+      {size && settings && format && trade && type && (
+        <button className={styles.btn}>Next</button>
+      )}
     </div>
   );
 }

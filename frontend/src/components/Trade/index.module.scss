@@ -50,16 +50,16 @@
   height: 100%;
 }
 
-.tab_active {
-  background-color: $primary-color;
-  color: $primary-text-color;
-  transition: 0.25s ease-in-out;
-}
 .wrapper {
   margin-top: 15px;
   margin-bottom: 15px;
+  & .tab_active {
+    background-color: $primary-color;
+    color: $primary-text-color;
+    transition: 0.25s ease-in-out;
+  }
 }
-button {
+.btn {
   font-family: "Nunito Sans", sans-serif;
   background-color: #753eca;
   color: #ffffff;

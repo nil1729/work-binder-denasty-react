@@ -12,19 +12,20 @@
 }
 .left_column {
   width: 50%;
+  & h3 {
+    background-color: #753eca;
+    color: #fff;
+    text-align: center;
+    padding: 10px 5px 10px 5px;
+    font-family: "Nunito Sans", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 4.5px !important;
+    border-right: 1px solid;
+    font-size: 30px;
+    font-weight: 400;
+  }
 }
-h3 {
-  background-color: #753eca;
-  color: #fff;
-  text-align: center;
-  padding: 10px 5px 10px 5px;
-  font-family: "Nunito Sans", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 4.5px !important;
-  border-right: 1px solid;
-  font-size: 30px;
-  font-weight: 400;
-}
+
 .section_total {
   border-right: 1px solid #fff !important;
   border-top: 1px solid #fff;
@@ -102,6 +103,7 @@ h3 {
 }
 
 .right_column {
+  @extend .left_column;
   width: 50%;
   & .grid_wrapper {
     & .grid {
