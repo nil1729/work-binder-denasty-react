@@ -37,7 +37,7 @@ function Sorted() {
 
     setCount((prev) => prev + 1);
     setDis(true);
-  }
+  }   
 
   return (
     <div className={styles.sortable_container}>
