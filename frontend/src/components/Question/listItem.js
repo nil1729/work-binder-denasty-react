@@ -5,6 +5,7 @@ function ListItem(props) {
 
   const counting = (e) => {
     if (!id) {
+      console.log(id);
       setId(props.count);
       props.incr();
     } else if (id) {
