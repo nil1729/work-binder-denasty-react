@@ -36,7 +36,6 @@ export default function Question() {
   ]);
 
   function increment() {
-    console.log(count);
     setCount((prev) => prev + 1);
   }
   function decrement() {

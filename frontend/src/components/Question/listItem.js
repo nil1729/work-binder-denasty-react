@@ -5,12 +5,13 @@ function ListItem(props) {
 
   const counting = (e) => {
     if (!id) {
-      console.log(id);
       setId(props.count);
       props.incr();
     } else if (id) {
-      setId("");
-      props.decre();
+      if (id + 1 === props.count) {
+        setId("");
+        props.decre();
+      }
     }
   };
   return (
