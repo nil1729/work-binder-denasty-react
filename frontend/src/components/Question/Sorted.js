@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styles from "./index.module.scss";
+import ListItem from "./listItem";
+
 function Sorted() {
   const [count, setCount] = useState(1);
+  const [dis, setDis] = useState(false);
   const [myList, setMyList] = useState([
     {
       id: "1",
@@ -12,52 +15,41 @@ function Sorted() {
       name: "David Moore",
     },
     {
-      id: "",
+      id: "3",
       name: "Allen Lazard",
     },
     {
-      id: "",
+      id: "4",
       name: "Kawaan Baker",
     },
     {
-      id: "",
+      id: "5",
       name: "Kenneth Gainwell",
     },
     {
-      id: "",
+      id: "6",
       name: "Logan Thomas",
     },
   ]);
 
-  const counting = (e) => {
-    console.log(e.target.value);
+  function increment() {
+    console.log("all");
+
     setCount((prev) => prev + 1);
-    // console.log(count);
-    let s = myList[e.target.value];
-    console.log(s);
-    s = count;
-  };
+    setDis(true);
+  }   
 
   return (
     <div className={styles.sortable_container}>
       <ul className={styles.draggable_container}>
         {myList.map((item, index) => (
-          <li
-            className={styles.draggable__item}
-            value={index}
+          <ListItem
             key={index}
-            onClick={(e) => counting(e)}
-          >
-            <div className={styles.number_column}>
-              <h2>{item.id}</h2>
-            </div>
-            <div className={styles.three__dot}>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-            <div className={styles.body__text}>{item.name}</div>
-          </li>
+            data={item}
+            dis={dis}
+            count={count}
+            incr={increment}
+          />
         ))}
       </ul>
     </div>

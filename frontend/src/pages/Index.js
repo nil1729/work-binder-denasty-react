@@ -24,10 +24,10 @@ const Home = () => {
 				Created to help you dominate your dynasty fantasy football leagues.
 			</PageBodyText>
 			<FeatureBtnContainer>
-				<FeatureBtn to='/'>trade calculator</FeatureBtn>
-				<FeatureBtn to='/'>dynamic rankings</FeatureBtn>
-				<FeatureBtn to='/'>tier builder tool</FeatureBtn>
-				<FeatureBtn to='/'>dynasty articles</FeatureBtn>
+				<FeatureBtn to='/trade_calculator'>trade calculator</FeatureBtn>
+				<FeatureBtn to='/rankings'>dynamic rankings</FeatureBtn>
+				<FeatureBtn to='/question'>tier builder tool</FeatureBtn>
+				<FeatureBtn to='/blog'>dynasty articles</FeatureBtn>
 			</FeatureBtnContainer>
 		</HomeContainer>
 	);
