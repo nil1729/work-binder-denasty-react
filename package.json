@@ -37,7 +37,8 @@
 		"randomstring": "^1.2.1",
 		"react-infinite-scroll-component": "^6.1.0",
 		"slugify": "^1.6.0",
-		"stringquery": "^1.0.8"
+		"stringquery": "^1.0.8",
+		"uuid": "^8.3.2"
 	},
 	"devDependencies": {
 		"dotenv": "^10.0.0",
