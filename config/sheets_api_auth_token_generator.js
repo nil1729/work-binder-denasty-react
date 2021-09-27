@@ -1,12 +1,18 @@
 const fs = require('fs');
 const readline = require('readline');
 const { google } = require('googleapis');
-const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 const TOKEN_PATH = 'token.json';
 const SHEETS_API_SECRET_PATH = 'gcp-sheets-api-secret.json';
 
 // Delete Old Tokens
-fs.unlinkSync(TOKEN_PATH);
+try {
+	fs.unlinkSync(TOKEN_PATH);
+} catch (err) {
+	if (err.code !== 'ENOENT') {
+		throw err;
+	}
+}
 
 fs.readFile(SHEETS_API_SECRET_PATH, (err, content) => {
 	if (err) return console.log('Error loading client secret file:', err);
