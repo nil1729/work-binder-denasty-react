@@ -9,7 +9,7 @@ const Question = ({ getAllPlayers }) => {
   const [count, setCount] = useState(1);
   const [newId, setId] = useState("");
   const [percentage, setPercentage] = useState(0);
-  const [question, setQuestion] = useState(150);
+  const [question, setQuestion] = useState(1);
   const [allPlayers, setAllPlayers] = useState([]);
   const [myList, setMyList] = useState([
     // {
