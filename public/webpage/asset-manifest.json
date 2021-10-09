@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.css": "/webpage/static/css/main.22da4f25.chunk.css",
-    "main.js": "/webpage/static/js/main.409801ab.chunk.js",
+    "main.css": "/webpage/static/css/main.e5dbec5d.chunk.css",
+    "main.js": "/webpage/static/js/main.3d0ec9d1.chunk.js",
     "runtime-main.js": "/webpage/static/js/runtime-main.9d41e898.js",
     "static/css/2.4b3bc86f.chunk.css": "/webpage/static/css/2.4b3bc86f.chunk.css",
-    "static/js/2.77e8b51d.chunk.js": "/webpage/static/js/2.77e8b51d.chunk.js",
+    "static/js/2.5bcbbc12.chunk.js": "/webpage/static/js/2.5bcbbc12.chunk.js",
     "index.html": "/webpage/index.html",
-    "static/js/2.77e8b51d.chunk.js.LICENSE.txt": "/webpage/static/js/2.77e8b51d.chunk.js.LICENSE.txt",
+    "static/js/2.5bcbbc12.chunk.js.LICENSE.txt": "/webpage/static/js/2.5bcbbc12.chunk.js.LICENSE.txt",
     "static/media/cross-icon.e7fc272e.svg": "/webpage/static/media/cross-icon.e7fc272e.svg",
     "static/media/logo-white-bg.079c6c67.svg": "/webpage/static/media/logo-white-bg.079c6c67.svg",
     "static/media/pencil-icon.1927b74f.svg": "/webpage/static/media/pencil-icon.1927b74f.svg",
@@ -17,8 +17,8 @@
   "entrypoints": [
     "static/js/runtime-main.9d41e898.js",
     "static/css/2.4b3bc86f.chunk.css",
-    "static/js/2.77e8b51d.chunk.js",
-    "static/css/main.22da4f25.chunk.css",
-    "static/js/main.409801ab.chunk.js"
+    "static/js/2.5bcbbc12.chunk.js",
+    "static/css/main.e5dbec5d.chunk.css",
+    "static/js/main.3d0ec9d1.chunk.js"
   ]
 }
