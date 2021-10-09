@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import styles from "./index.module.scss";
+// import styles from "./index.module.scss";
+// import { draggableItem, numberColumn, idColumn } from "./styledComponent";
+import {
+  DraggableItem,
+  NumberColumn,
+  IdColumn,
+  ThreeDots,
+  Icons,
+  BodyText,
+} from "./styledComponent.js";
 function ListItem(props) {
   const [id, setId] = useState(props.data.id);
 
@@ -23,22 +32,25 @@ function ListItem(props) {
   };
   return (
     <>
-      <li
-        className={styles.draggable__item}
+      <DraggableItem
+        // className={styles.draggable__item}
         value={props.data.player_id}
         onClick={() => counting()}
       >
-        <div className={styles.number_column}>
-          <h2>{props.data.id}</h2>
-        </div>
+        <NumberColumn
+        // className={styles.number_column}
+        >
+          <IdColumn>{props.data.id}</IdColumn>
+        </NumberColumn>
 
-        <div className={styles.three__dot}>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div className={styles.body__text}>{props.data.name}</div>
-      </li>
+        <ThreeDots>
+          <Icons></Icons>
+          <Icons></Icons>
+          <Icons></Icons>
+        </ThreeDots>
+        {/* <div className={styles.body__text}>{props.data.name}</div> */}
+        <BodyText>{props.data.name}</BodyText>
+      </DraggableItem>
     </>
   );
 }

@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addAlert } from "../store/actions/alerts";
 import querySearch from "stringquery";
-
+import styled from "styled-components";
 function Users({ addAlert }) {
   const history = useHistory();
 
@@ -93,7 +93,6 @@ function Users({ addAlert }) {
         }
       });
       if (count == 5) {
-        set_give_players((prev) => {});
       }
       //   if (give_players) {
       //     console.log(give_players[0]);
@@ -180,10 +179,40 @@ function Users({ addAlert }) {
       );
     }
   };
-
+  const HeaderStat = styled.div`
+    background: ${(props) => props.theme.secondBackground};
+    transition: all 1.5s ease;
+    width: 95%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $primary-font;
+    padding: 15px;
+    margin: auto;
+    border-radius: 10px;
+    position: sticky;
+    top: 65px;
+    z-index: 10;
+    color: ${(props) => props.theme.textColor};
+    @media screen and (max-width: 600px) {
+      top: 60px;
+    }
+  `;
+  const UserItem = styled.div`
+    background: ${(props) => props.theme.secondBackground};
+    color: ${(props) => props.theme.textColor};
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 0 20px 20px;
+    font-family: $primary-font;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  `;
   return (
     <div className={styles.container}>
-      <div className={styles.header__stat}>
+      <HeaderStat className={styles.header__stat}>
         <div className={styles.header__stat__container}>
           <div className={styles.value__stat}>
             <h4>give</h4>
@@ -217,14 +246,14 @@ function Users({ addAlert }) {
             </div>
           </div>
         </div>
-      </div>
+      </HeaderStat>
       <div className={styles.user_player_wrapper}>
         <div className={styles.give_players}>
           <h3 className={styles.user__container__title}>GIVE</h3>
           <div className={styles.user__container}>
             {give_players.map((item, index) =>
               item ? (
-                <div className={styles.user__item} key={index}>
+                <UserItem className={styles.user__item} key={index}>
                   <div
                     className={styles.cross__icon__container}
                     onClick={() => {
@@ -269,7 +298,7 @@ function Users({ addAlert }) {
                       <img src={EditIcon} alt="" />
                     </div>
                   </div>
-                </div>
+                </UserItem>
               ) : (
                 <div
                   className={`${styles.user__item} ${styles.blank__item}`}
@@ -292,7 +321,7 @@ function Users({ addAlert }) {
           <div className={styles.user__container}>
             {receive_players.map((item, index) =>
               item ? (
-                <div className={styles.user__item} key={index}>
+                <UserItem className={styles.user__item} key={index}>
                   <div
                     className={styles.cross__icon__container}
                     onClick={() => {
@@ -337,7 +366,7 @@ function Users({ addAlert }) {
                       <img src={EditIcon} alt="" />
                     </div>
                   </div>
-                </div>
+                </UserItem>
               ) : (
                 <div
                   className={`${styles.user__item} ${styles.blank__item}`}

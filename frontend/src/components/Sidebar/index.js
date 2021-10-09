@@ -11,7 +11,7 @@ import {
 
 import { Link } from "react-router-dom";
 import styles from "./sidebar.module.scss";
-const Sidebar = ({ isOpen, toggle }) => {
+const Sidebar = ({ isOpen, toggle, ...props }) => {
   const sideMenus = [
     {
       title: "home",
@@ -34,12 +34,21 @@ const Sidebar = ({ isOpen, toggle }) => {
       path: "/login",
     },
   ];
-  const [leagueFormat, setLeagueFormat] = useState("ON");
+  const [leagueFormat, setLeagueFormat] = useState("OFF");
   const changeTab = (tab) => async () => {
-    setLeagueFormat(tab);
+    // setLeagueFormat(tab);
+    if (tab === "ON") {
+      props.setTheme("dark");
+    } else {
+      props.setTheme("light");
+    }
   };
   return (
-    <nav className={`${styles.nav_menu} ${isOpen ? styles.active : ""}`}>
+    <nav
+      className={`${styles.nav_menu} ${isOpen ? styles.active : ""} ${
+        props.theme === "light" ? styles.dark : styles.light
+      }`}
+    >
       <ul className={styles.nav_menu_items} onClick={toggle}>
         {sideMenus.map((item, index) => {
           return (
@@ -52,7 +61,7 @@ const Sidebar = ({ isOpen, toggle }) => {
           <div className={styles.tab__btn__container}>
             <div
               className={`${styles.tab__btn} ${
-                leagueFormat === "ON" ? styles.tab__active : ""
+                props.theme === "dark" ? styles.tab__active_dark : ""
               }`}
               onClick={changeTab("ON")}
             >
@@ -60,7 +69,7 @@ const Sidebar = ({ isOpen, toggle }) => {
             </div>
             <div
               className={`${styles.tab__btn} ${
-                leagueFormat === "OFF" ? styles.tab__active : ""
+                props.theme === "light" ? styles.tab__active : ""
               }`}
               onClick={changeTab("OFF")}
             >

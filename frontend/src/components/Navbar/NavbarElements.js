@@ -50,6 +50,7 @@ export const NavLogo = styled(LinkR)`
 `;
 export const MobileIcon = styled.div`
   display: none;
+  color: ${(props) => props.theme.pageBackground};
   @media (max-width: 600px) {
     ${
       "" /* display: block;
@@ -82,7 +83,6 @@ export const NavItem = styled.li`
   ${"" /* height: 21px; */}
 `;
 export const NavLinks = styled(LinkR)`
-  color: #000;
   display: flex;
   align-items: right;
   text-decoration: none;
@@ -91,6 +91,6 @@ export const NavLinks = styled(LinkR)`
   ${"" /* height: 21px; */}
   cursor: pointer;
   font-family: "Nunito Sans", sans-serif;
-  color: #fff;
+  color: ${(props) => props.theme.pageBackground};
   letter-spacing: 0.1px;
 `;

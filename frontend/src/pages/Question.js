@@ -5,6 +5,7 @@ import Sorted from "../components/Question/Sorted";
 import ListItem from "../components/Question/listItem";
 import { connect } from "react-redux";
 import { getAllPlayers } from "../store/actions/dynasty/rankings";
+import styled from "styled-components";
 const Question = ({ getAllPlayers }) => {
   const [count, setCount] = useState(1);
   const [newId, setId] = useState("");
@@ -89,7 +90,7 @@ const Question = ({ getAllPlayers }) => {
   const fetchData = async () => {
     // setFetchingList(true);
     const dt = await getAllPlayers();
-    console.log(dt.data);
+    // console.log(dt.data);
     setAllPlayers(dt.data);
     // const x = [];
     // for (let index = 0; index < 6; index++) {
@@ -106,64 +107,76 @@ const Question = ({ getAllPlayers }) => {
   //   console.log(x);
   //   setMyList(x);
   // };
+  const Page = styled.div`
+    color: ${(props) => props.theme.textColor};
+    transition: all 1.5s ease;
+    width: 800px;
+    margin: auto;
+    margin-top: 2rem;
+    @media (max-width: 600px) {
+      width: 95%;
+      margin-top: 1.5rem;
+    }
+  `;
   return (
-    <div className={styles.container}>
-      <div className={styles.top_progress}>
-        <div
-          className={styles.top_progress_bar}
-          style={{ width: ` ${percentage}%` }}
-        ></div>
-      </div>
-      <div className={styles.question_header}>
-        <h3 className={styles.question_num}>Question {question}</h3>
-        <h2 className={styles.question_text}>
-          Rank these players from best to worst
-        </h2>
-      </div>
-      {/* <Sortable /> */}
-      {/* <Sorted /> */}
-      <div className={styles.sortable_container}>
-        <ul className={styles.draggable_container2}>
-          {console.log(myList)}
-          {allPlayers
-            .slice((question - 1) * 6, 6 * question)
-            .map((item, index) => (
-              <ListItem
-                key={index}
-                data={item}
-                count={count}
-                incr={increment}
-                decre={decrement}
-                counts={settingCount}
-                id={newId}
-              />
-            ))}
-        </ul>
-      </div>
-      <div className={styles.action_btn_container2}>
-        {question !== 1 && (count == 7 || count == 1) && (
-          <button className={styles.btn} onClick={handlePrev}>
-            Prev
-          </button>
-        )}
+    <Page>
+      <div className={styles.container}>
+        <div className={styles.top_progress}>
+          <div
+            className={styles.top_progress_bar}
+            style={{ width: ` ${percentage}%` }}
+          ></div>
+        </div>
+        <div className={styles.question_header}>
+          <h3 className={styles.question_num}>Question {question}</h3>
+          <h2 className={styles.question_text}>
+            Rank these players from best to worst
+          </h2>
+        </div>
+        {/* <Sortable /> */}
+        {/* <Sorted /> */}
+        <div className={styles.sortable_container}>
+          <ul className={styles.draggable_container2}>
+            {allPlayers
+              .slice((question - 1) * 6, 6 * question)
+              .map((item, index) => (
+                <ListItem
+                  key={index}
+                  data={item}
+                  count={count}
+                  incr={increment}
+                  decre={decrement}
+                  counts={settingCount}
+                  id={newId}
+                />
+              ))}
+          </ul>
+        </div>
+        <div className={styles.action_btn_container2}>
+          {question !== 1 && (count == 7 || count == 1) && (
+            <button className={styles.btn} onClick={handlePrev}>
+              Prev
+            </button>
+          )}
 
-        {question !== 150 && count == 1 && (
-          <button className={styles.btn} onClick={handleNext}>
-            Next
-          </button>
-        )}
-        {question == 150 && count == 1 && (
-          <button className={styles.btn} onClick={handleSubmit}>
-            Submit
-          </button>
-        )}
+          {question !== 150 && count == 1 && (
+            <button className={styles.btn} onClick={handleNext}>
+              Next
+            </button>
+          )}
+          {question == 150 && count == 1 && (
+            <button className={styles.btn} onClick={handleSubmit}>
+              Submit
+            </button>
+          )}
 
-        {/* <div className={styles.reset_btn} onClick={handleReset}>
+          {/* <div className={styles.reset_btn} onClick={handleReset}>
           prev
         </div>
         <div className={styles.next_btn}>next</div> */}
+        </div>
       </div>
-    </div>
+    </Page>
   );
 };
 

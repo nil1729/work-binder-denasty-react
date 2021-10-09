@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getRankings } from "../store/actions/dynasty/rankings";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import InfiniteScroll from "react-infinite-scroll-component";
+import styled from "styled-components";
 function PPR({ getRankings }) {
   const [leagFormat, setLeagueFormat] = useState("PPR");
   const [rankingList, setRankingList] = useState([]);
@@ -28,17 +29,27 @@ function PPR({ getRankings }) {
   const fetchMoreData = async (page = currentPage + 1) => {
     try {
       const res = await getRankings(leagFormat, page);
-      console.log(res);
+
       setCurrentPage(currentPage + 1);
       setRankingList([...rankingList, ...res]);
     } catch (e) {
-      console.log(e);
       setHasMore(false);
     }
   };
-
+  const Page = styled.div`
+    color: ${(props) => props.theme.textColor};
+    transition: all 1.5s ease;
+    width: 800px;
+    margin: auto;
+    margin-top: 2rem;
+    @media (max-width: 600px) {
+      width: 95%;
+      margin-top: 1.5rem;
+    }
+  `;
   return (
-    <div className={styles.container}>
+    <Page>
+      {/* <div className={styles.container}> */}
       <h2 className={styles.page_title}>PPR Rankings</h2>
       <div className={styles.tab_btn_container}>
         <div
@@ -108,7 +119,8 @@ function PPR({ getRankings }) {
           )}
         </div>
       </div>
-    </div>
+      {/* </div> */}
+    </Page>
   );
 }
 

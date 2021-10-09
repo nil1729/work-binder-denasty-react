@@ -4,7 +4,7 @@
   width: 825px;
   margin: auto;
   margin-top: 2rem;
-  margin-bottom: 3rem;
+  padding-bottom: 3rem;
   position: relative;
   @media (max-width: 600px) {
     width: 95%;
@@ -34,22 +34,22 @@
 }
 
 .header__stat {
-  width: 95%;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: $primary-font;
-  padding: 15px;
-  margin: auto;
-  border-radius: 10px;
-  position: sticky;
-  top: 65px;
-  z-index: 10;
-  background-color: #fff;
-  @media screen and (max-width: 600px) {
-    top: 60px;
-  }
+  // width: 95%;
+  // box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // font-family: $primary-font;
+  // padding: 15px;
+  // margin: auto;
+  // border-radius: 10px;
+  // position: sticky;
+  // top: 65px;
+  // z-index: 10;
+  // background-color: #fff;
+  // @media screen and (max-width: 600px) {
+  //   top: 60px;
+  // }
 
   & > div {
     width: 100%;
@@ -72,14 +72,16 @@
 
       h3 {
         color: $primary-color;
-        font-size: 28px;
+        font-size: 35px;
         font-weight: 600;
+        font-family: Oswald;
       }
 
       h5 {
         font-weight: 500;
-        font-size: 15px;
-        color: $secondary-text-color;
+        font-size: 12px;
+        // color: $secondary-text-color;
+        color: #d2d7e0;
       }
     }
   }
@@ -95,7 +97,7 @@
     }
 
     .tab__btn__container {
-      background-color: #f2f2f2;
+      // background-color: #f2f2f2;
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -103,11 +105,10 @@
       overflow: hidden;
       width: 80%;
       margin: 0 auto;
-
+      border: 1px solid #fff;
       // @media (max-width: 600px) {
       // 	width: 90%;
       // }
-
       .tab__btn {
         width: 100%;
         text-align: center;
@@ -222,7 +223,6 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-
         .image__container {
           flex-basis: 50%;
           height: 100px;
@@ -244,16 +244,18 @@
           flex-direction: column;
 
           h2 {
-            font-size: 40px;
-            font-weight: 500;
+            font-size: 33px;
+            font-weight: 600;
             color: $primary-color;
+            font-family: Oswald;
           }
 
           h3 {
             text-transform: uppercase;
             font-weight: 500;
             color: $secondary-text-color;
-            font-size: 20px;
+            font-size: 12px;
+            color: #d2d7e0;
           }
         }
       }
@@ -387,11 +389,11 @@
 
           .value__container {
             h2 {
-              font-size: 25px;
+              font-size: 33px;
             }
 
             h3 {
-              font-size: 15px;
+              font-size: 12px;
             }
           }
         }
