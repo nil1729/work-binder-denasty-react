@@ -93,7 +93,7 @@ exports.publishRankedList = asyncHandler(async (req, res, next) => {
 	const sheets = google.sheets({ version: 'v4', auth: req.GOOGLE_OAUTH_CREDENTIALS });
 
 	const data = req.body;
-	if (_.isArray(data)) {
+	if (_.isArray(data) && data.length === 150) {
 		const groupedData = groupBy(data);
 		const firstPart = data.slice(0, data.length / 3);
 		let rankedPlayersList = [];
@@ -109,6 +109,7 @@ exports.publishRankedList = asyncHandler(async (req, res, next) => {
 				player_id: player.player_id,
 			});
 		});
+
 		let sortedList = rankedPlayersList.sort(sortBasedOnRank);
 		let sheetValues = sortedList.map((player) => {
 			return [player.rank, player.name];
