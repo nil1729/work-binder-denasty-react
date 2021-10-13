@@ -37,13 +37,12 @@ export const BlogItemContainer = styled.div`
   justify-content: center;
   align-items: flex-start;
   margin: 0 auto;
-  margin-bottom: 2.2rem;
+  padding-bottom: 2.2rem;
   flex-wrap: wrap;
   width: 90%;
   overflow: hidden;
   @media (max-width: 600px) {
     flex-direction: column;
-    height: auto;
   }
 `;
 
@@ -66,13 +65,16 @@ export const BlogItemImageContainer = styled.div`
   width: 100%;
 `;
 export const BlogItemImageWrapper = styled.div`
-  height: 500px;
+  height: 520px;
+  @media (max-width: 600px) {
+    height: 280px;
+  }
 `;
 
 export const BlogItemTitle = styled.h1`
   font-size: 30px;
   font-weight: 500;
-
+  color: #fff;
   font-family: "Nunito Sans", sans-serif;
   line-height: 30px;
   @media (max-width: 600px) {
@@ -84,7 +86,7 @@ export const BlogItemTitle = styled.h1`
 export const BlogItemAuthor = styled.p`
   font-size: 14px;
   font-weight: 300;
-  color: black;
+  color: ${(props) => props.theme.textColor};
   font-family: "Nunito Sans", sans-serif;
   margin-bottom: 10px;
   span {
@@ -95,7 +97,7 @@ export const BlogItemAuthor = styled.p`
 export const BlogItemTextPara = styled.p`
   font-size: 16px;
   margin-bottom: 20px;
-  color: #242629;
+  color: ${(props) => props.theme.differentColor};
   line-height: 26px;
   font-family: "Nunito Sans", sans-serif;
   @media (max-width: 600px) {
@@ -132,7 +134,7 @@ export const BlogItemImageTextContainer = styled.div`
 export const BlogItemImageText = styled.div`
   widdth: 80%;
   font-size: 15px;
-  color: #242629;
+  color: ${(props) => props.theme.differentColor};
   line-height: 26px;
   opacity: 40%;
   text-align: center;

@@ -1,37 +1,56 @@
 import React, { useState } from "react";
-import styles from "./index.module.scss";
+// import styles from "./index.module.scss";
+// import { draggableItem, numberColumn, idColumn } from "./styledComponent";
+import {
+  DraggableItem,
+  NumberColumn,
+  IdColumn,
+  ThreeDots,
+  Icons,
+  BodyText,
+} from "./styledComponent.js";
 function ListItem(props) {
-  const [id, setId] = useState(props.id);
+  const [id, setId] = useState(props.data.id);
 
   const counting = (e) => {
-    if (!id) {
-      setId(props.count);
+    if (!props.data.id) {
+      // setId(props.count);
+
       props.incr();
-    } else if (id) {
-      if (id + 1 === props.count) {
-        setId("");
-        props.decre();
+      props.data.id = props.count;
+      if (props.count == 6) {
+        props.counts(1);
       }
+    } else if (props.data.id + 1 === props.count) {
+      // setId("");
+      props.data.id = "";
+      props.decre();
+    } else if (props.data.id == 6) {
+      props.counts(props.data.id);
+      props.data.id = "";
     }
   };
   return (
     <>
-      <li
-        className={styles.draggable__item}
-        value={props.data.id}
-        onClick={(id) => counting(id)}
+      <DraggableItem
+        // className={styles.draggable__item}
+        value={props.data.player_id}
+        onClick={() => counting()}
       >
-        <div className={styles.number_column}>
-          <h2>{id}</h2>
-        </div>
+        <NumberColumn
+        // className={styles.number_column}
+        >
+          <IdColumn>{props.data.id}</IdColumn>
+        </NumberColumn>
 
-        <div className={styles.three__dot}>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div className={styles.body__text}>{props.data.name}</div>
-      </li>
+        <ThreeDots>
+          <Icons></Icons>
+          <Icons></Icons>
+          <Icons></Icons>
+        </ThreeDots>
+        {/* <div className={styles.body__text}>{props.data.name}</div> */}
+        <BodyText>{props.data.name}</BodyText>
+      </DraggableItem>
     </>
   );
 }
