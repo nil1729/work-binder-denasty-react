@@ -111,8 +111,8 @@ exports.publishRankedList = asyncHandler(async (req, res, next) => {
 		});
 
 		let sortedList = rankedPlayersList.sort(sortBasedOnRank);
-		let sheetValues = sortedList.map((player) => {
-			return [player.rank, player.name];
+		let sheetValues = sortedList.map((player, index) => {
+			return [index, player.name];
 		});
 
 		await sheets.spreadsheets.values.update({
