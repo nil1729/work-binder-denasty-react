@@ -86,3 +86,70 @@ exports.getAllPlayers = asyncHandler(async (req, res, next) => {
 		});
 	} else throw new ErrorResponse(`No players found`, 404);
 });
+
+exports.publishRankedList = asyncHandler(async (req, res, next) => {
+	if (!req.GOOGLE_OAUTH_CREDENTIALS)
+		throw new ErrorResponse(`Error while retrieving data from source`, 500);
+	const sheets = google.sheets({ version: 'v4', auth: req.GOOGLE_OAUTH_CREDENTIALS });
+
+	const data = req.body;
+	if (_.isArray(data) && data.length === 150) {
+		const groupedData = groupBy(data);
+		const firstPart = data.slice(0, data.length / 3);
+		let rankedPlayersList = [];
+
+		firstPart.forEach((player) => {
+			let totalRank = 0;
+			groupedData
+				.get(player.player_id)
+				.forEach((it) => (totalRank += Number(it.rank || randomIntFromInterval(1, 6))));
+			rankedPlayersList.push({
+				rank: totalRank,
+				name: player.name,
+				player_id: player.player_id,
+			});
+		});
+
+		let sortedList = rankedPlayersList.sort(sortBasedOnRank);
+		let sheetValues = sortedList.map((player, index) => {
+			return [index, player.name];
+		});
+
+		await sheets.spreadsheets.values.update({
+			spreadsheetId: process.env.SPREADSHEET_ID,
+			range: `RANKINGS!A2:B`,
+			valueInputOption: 'RAW',
+			resource: {
+				values: sheetValues,
+			},
+		});
+		return res.status(200).json({
+			message: 'Ranked list published successfully',
+		});
+	} else throw new ErrorResponse(`Invalid data`, 400);
+});
+
+function sortBasedOnRank(a, b) {
+	if (Number(a.rank) < Number(b.rank)) return -1;
+	if (Number(a.rank) > Number(b.rank)) return 1;
+	return 0;
+}
+
+function groupBy(list) {
+	const map = new Map();
+	list.forEach((item) => {
+		const key = item.player_id;
+		const collection = map.get(key);
+		if (!collection) {
+			map.set(key, [item]);
+		} else {
+			collection.push(item);
+		}
+	});
+	return map;
+}
+
+function randomIntFromInterval(min, max) {
+	// min and max included
+	return Math.floor(Math.random() * (max - min + 1) + min);
+}
