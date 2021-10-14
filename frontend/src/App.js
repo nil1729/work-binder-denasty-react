@@ -24,10 +24,12 @@ import Reset from "./pages/Reset";
 import TextEditor from "./pages/TextEditor";
 import BlogDetails from "./pages/BlogDetails";
 import Dashboard from "./pages/Dashboard";
-import Trade from "./pages/Trade";
-import Trade2 from "./pages/Trade2";
 import { ThemeProvider } from "styled-components";
 import styled from "styled-components";
+const Page = styled.div`
+  background-color: ${(props) => props.theme.pageBackground};
+  transition: all 1.5s ease;
+`;
 const LightTheme = {
   pageBackground: "#FFFFFF",
   textColor: "#181C28",
@@ -66,10 +68,7 @@ const App = ({ loadUser }) => {
     loadUser();
     //eslint-disable-next-line
   }, []);
-  const Page = styled.div`
-    background-color: ${themes[theme].pageBackground};
-    transition: all 1.5s ease;
-  `;
+
   return (
     <ThemeProvider theme={themes[theme]}>
       <Page>

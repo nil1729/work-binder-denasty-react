@@ -7,12 +7,43 @@ import CrossIcon from "../components/Users/assets/cross-icon.svg";
 import UserAddIcon from "../components/Users/assets/user-add-icon.svg";
 import Search from "./Search";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { addAlert } from "../store/actions/alerts";
-import querySearch from "stringquery";
+
 import styled from "styled-components";
-function Users({ addAlert }) {
-  const history = useHistory();
+
+const HeaderStat = styled.div`
+  background: ${(props) => props.theme.secondBackground};
+  transition: all 1.5s ease;
+  width: 95%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: $primary-font;
+  padding: 15px;
+  margin: auto;
+  border-radius: 10px;
+  position: sticky;
+  top: 65px;
+  z-index: 10;
+  color: ${(props) => props.theme.textColor};
+  @media screen and (max-width: 600px) {
+    top: 60px;
+  }
+`;
+const UserItem = styled.div`
+  background: ${(props) => props.theme.secondBackground};
+  color: ${(props) => props.theme.textColor};
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 0 20px 20px;
+  font-family: $primary-font;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1rem;
+`;
+function Users() {
+  // const history = useHistory();
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
@@ -21,11 +52,11 @@ function Users({ addAlert }) {
   const handleClose = () => {
     setOpen(false);
   };
-  const [leaueSize, setLeagueSize] = useState(null);
-  const [scoringSetting, setScoringSetting] = useState(null);
+  // const [leaueSize, setLeagueSize] = useState(null);
+  // const [scoringSetting, setScoringSetting] = useState(null);
   const [leagueFormat, setLeagueFormat] = useState("STANDARD");
-  const [tradeType, setTradeType] = useState(null);
-  const [leagueType, setLeagueType] = useState(null);
+  // const [tradeType, setTradeType] = useState(null);
+  // const [leagueType, setLeagueType] = useState(null);
   const [give_value, set_give_value] = useState("0.0");
   const [receive_value, set_receive_value] = useState("0.0");
   const [give_players, set_give_players] = useState(Array.from({ length: 6 }));
@@ -38,77 +69,55 @@ function Users({ addAlert }) {
   const [selectionType, setSelectionType] = useState(null);
   const [selectedPlayerWhenEdit, setSelectedPlayerWhenEdit] = useState(null);
 
-  // const requiredFields = [
-  // 	'league_format',
-  // 	'league_size',
-  // 	'league_type',
-  // 	'scoring_settings',
-  // 	'trade_type',
-  // ];
-  // const validLeagueFormat = ['STANDARD', 'SF-TE-PREMIUM'];
-
-  // React.useEffect(() => {
-  // 	let parsedSearchQuery = querySearch(history.location.search);
-  // 	if (
-  // 		requiredFields.every((key) => Object.keys(parsedSearchQuery).includes(key)) &&
-  // 		validLeagueFormat.includes(parsedSearchQuery.league_format)
-  // 	) {
-  // 		setLeagueFormat(parsedSearchQuery.league_format);
-  // 		setLeagueType(parsedSearchQuery.league_type);
-  // 		setLeagueSize(parsedSearchQuery.league_size);
-  // 		setTradeType(parsedSearchQuery.trade_type);
-  // 		setScoringSetting(parsedSearchQuery.scoring_settings);
-  // 	} else {
-  // 		addAlert('error', 'Please choose the required option first');
-  // 		history.push('/trade_calculator');
-  // 	}
-  // 	// eslint-disable-next-line
-  // }, []);
-
   const changeTab = (tab) => async () => {
-    //   if (selectedTab === tabIndex) return;
-    //   const rankType = tabIndex === 1 ? "PPR" : "SF-TE-PREMIUM";
-    //   setSelectedTab(tabIndex);
-    //   setCurrentRankingType(rankType);
-    //   setMyPagination({ page: 1 });
-    //   fetchData(rankType);
     setLeagueFormat(tab);
   };
+
   const selectPlayer = (player, player_type, selectedIndex) => {
     if (player_type === "giver") {
-      set_give_players(
-        give_players.map((it, index) => {
-          if (index === selectedIndex) return player;
-          else return it;
-        })
-      );
+      let newPlayerSet = give_players.map((it, index) => {
+        if (index === selectedIndex) return player;
+        else return it;
+      });
+      set_give_players(newPlayerSet);
       set_give_value(
         Number(parseFloat(give_value) + parseFloat(player.value)).toFixed(2)
       );
       setSelectedPlayers([...selectedPlayers, player]);
-      let count = 0;
-      give_players.map((it, index) => {
-        if (it) {
-          count++;
-        }
+
+      let filledCount = 0;
+      newPlayerSet.forEach((it) => {
+        if (it) filledCount++;
       });
-      if (count == 5) {
+      if (
+        filledCount % 3 === 0 &&
+        filledCount >= 6 &&
+        newPlayerSet.length <= filledCount
+      ) {
+        set_give_players(newPlayerSet.concat(Array.from({ length: 3 })));
       }
-      //   if (give_players) {
-      //     console.log(give_players[0]);
-      //     // set_give_players(Array.from({ length: 9 }));
-      //   }
     } else {
-      set_receive_players(
-        receive_players.map((it, index) => {
-          if (index === selectedIndex) return player;
-          else return it;
-        })
-      );
+      let newPlayerSet = receive_players.map((it, index) => {
+        if (index === selectedIndex) return player;
+        else return it;
+      });
+      set_receive_players(newPlayerSet);
       set_receive_value(
         Number(parseFloat(receive_value) + parseFloat(player.value)).toFixed(2)
       );
       setSelectedPlayers([...selectedPlayers, player]);
+
+      let filledCount = 0;
+      newPlayerSet.forEach((it) => {
+        if (it) filledCount++;
+      });
+      if (
+        filledCount % 3 === 0 &&
+        filledCount >= 6 &&
+        newPlayerSet.length <= filledCount
+      ) {
+        set_receive_players(newPlayerSet.concat(Array.from({ length: 3 })));
+      }
     }
   };
 
@@ -179,37 +188,6 @@ function Users({ addAlert }) {
       );
     }
   };
-  const HeaderStat = styled.div`
-    background: ${(props) => props.theme.secondBackground};
-    transition: all 1.5s ease;
-    width: 95%;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: $primary-font;
-    padding: 15px;
-    margin: auto;
-    border-radius: 10px;
-    position: sticky;
-    top: 65px;
-    z-index: 10;
-    color: ${(props) => props.theme.textColor};
-    @media screen and (max-width: 600px) {
-      top: 60px;
-    }
-  `;
-  const UserItem = styled.div`
-    background: ${(props) => props.theme.secondBackground};
-    color: ${(props) => props.theme.textColor};
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    padding: 0 20px 20px;
-    font-family: $primary-font;
-    border-radius: 15px;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 1rem;
-  `;
   return (
     <div className={styles.container}>
       <HeaderStat className={styles.header__stat}>

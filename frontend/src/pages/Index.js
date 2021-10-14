@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Logo from "../images/logo-white-bg.svg";
 
 // Styled Components

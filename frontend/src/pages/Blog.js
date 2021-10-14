@@ -3,7 +3,6 @@ import {
   BlogContainer,
   PageTitle,
   BlogItemContainer,
-  BlogItemImage,
   BlogItemTextContainer,
   BlogItemImageContainer,
   BlogItemTitle,
@@ -60,13 +59,14 @@ function Blog({ getAllBlogs }) {
     setBlogFetching(true);
     getAllBlogs()
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setBlogFetching(false);
         setBlogList(data.data);
       })
       .catch((err) => {
         // window.location.reload();
       });
+    // eslint-disable-next-line
   }, []);
 
   return (

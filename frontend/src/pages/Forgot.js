@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import Divider from "@material-ui/core/Divider";
+import React, { useState } from "react";
+
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import { Link } from "react-router-dom";

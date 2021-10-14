@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import Divider from "@material-ui/core/Divider";
+import React, { useState } from "react";
+
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { resetPasswordRequest } from "../store/actions/auth";
 
@@ -78,7 +78,6 @@ const Reset = ({ resetPasswordRequest, ...rest }) => {
     password: false,
     confirm_password: false,
   });
-  const [attempt, setAttempt] = useState(0);
 
   // On change handler
   const onChange = (e) => {

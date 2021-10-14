@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "../components/Trade2/index.module.scss";
-import PersonIcon from "@material-ui/icons/Person";
-import AddIcon from "@material-ui/icons/Add";
-import CloseIcon from "@material-ui/icons/Close";
-import EditIcon from "@material-ui/icons/Edit";
+// import PersonIcon from "@material-ui/icons/Person";
+// import AddIcon from "@material-ui/icons/Add";
+// import CloseIcon from "@material-ui/icons/Close";
+// import EditIcon from "@material-ui/icons/Edit";
 import Player from "../components/Trade2/player";
 function Trade2() {
-  const [showEditOption, setShowEditOption] = useState(false);
-  const showEdit = () => {
-    setShowEditOption(true);
-  };
+  // const [showEditOption, setShowEditOption] = useState(false);
+  // const showEdit = () => {
+  //   setShowEditOption(true);
+  // };
   return (
     <div className={styles.container}>
       <div className={styles.left_column}>

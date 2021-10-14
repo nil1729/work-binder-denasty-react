@@ -4,9 +4,26 @@ import SearchIcon from "../components/Search/assets/search-icon.svg";
 import CrossIcon from "../components/Users/assets/cross-icon.svg";
 import InfiniteScroll from "react-infinite-scroll-component";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import axios from "axios";
 import sendRequest from "../store/utils/axios-setup";
 import styled from "styled-components";
+
+const Page = styled.div`
+  background-color: ${(props) => props.theme.pageBackground};
+  transition: all 1.5s ease;
+  position: relative;
+  color: ${(props) => props.theme.textColor};
+  width: 800px;
+  margin: auto;
+  padding-top: 15px;
+  font-family: "Nunito Sans", sans-serif;
+  overflow: hidden;
+  @media (max-width: 600px) {
+    width: 95%;
+    margin-top: 1.5rem;
+    margin-top: 10px;
+  }
+  max-height: 550px;
+`;
 function Search({
   handleClose,
   leagueFormat,
@@ -28,29 +45,34 @@ function Search({
     // eslint-disable-next-line
   }, []);
 
-  const fetchMoreData = async () => {
+  const fetchMoreData = async (given_page, last_data = []) => {
     try {
       const res = await sendRequest.get(
         `/dynasty/list_players/${leagueFormat}?page=${
-          currentPage + 1
+          Number(given_page) || currentPage + 1
         }&limit=${25}`
       );
-      setCurrentPage(currentPage + 1);
+      setCurrentPage(Number(given_page + 1) || currentPage + 1);
+
+      let excludedList = [];
       if (selectionType === "edit") {
         selectedRanks = selectedRanks.filter(
           (it) => it !== selectedPlayerWhenEdit.rank
         );
-        setPlayerList(
-          [...playerList, ...res.data].filter(
-            (player) => !selectedRanks.includes(player.rank)
-          )
+        excludedList = [...playerList, ...res.data].filter(
+          (player) => !selectedRanks.includes(player.rank)
         );
       } else {
-        setPlayerList(
-          [...playerList, ...res.data].filter(
-            (player) => !selectedRanks.includes(player.rank)
-          )
+        excludedList = [...playerList, ...res.data].filter(
+          (player) => !selectedRanks.includes(player.rank)
         );
+      }
+
+      if (excludedList.length >= 15) {
+        setPlayerList(last_data.concat(excludedList));
+      } else {
+        let curPage = Number(given_page) || currentPage;
+        await fetchMoreData(curPage + 1, excludedList);
       }
     } catch (e) {
       console.log(e);
@@ -70,23 +92,7 @@ function Search({
     }
     handleClose();
   };
-  const Page = styled.div`
-    background-color: ${(props) => props.theme.pageBackground};
-    transition: all 1.5s ease;
-    position: relative;
-    color: ${(props) => props.theme.textColor};
-    width: 800px;
-    margin: auto;
-    padding-top: 15px;
-    font-family: "Nunito Sans", sans-serif;
-    overflow: hidden;
-    @media (max-width: 600px) {
-      width: 95%;
-      margin-top: 1.5rem;
-      margin-top: 10px;
-    }
-    max-height: 550px;
-  `;
+
   return (
     <Page>
       {/* <div className={styles.container}> */}

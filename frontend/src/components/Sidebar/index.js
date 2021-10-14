@@ -1,14 +1,4 @@
-import React, { useState } from "react";
-
-import {
-  SidebarContainer,
-  Icon,
-  CloseIcon,
-  SidebarWrapper,
-  SidebarLink,
-  SidebarMenu,
-} from "./SidebarElements";
-
+import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./sidebar.module.scss";
 const Sidebar = ({ isOpen, toggle, ...props }) => {
@@ -34,7 +24,7 @@ const Sidebar = ({ isOpen, toggle, ...props }) => {
       path: "/login",
     },
   ];
-  const [leagueFormat, setLeagueFormat] = useState("OFF");
+
   const changeTab = (tab) => async () => {
     // setLeagueFormat(tab);
     if (tab === "ON") {

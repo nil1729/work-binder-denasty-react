@@ -2,7 +2,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { logOut } from "../../store/actions/auth";
-import { FaBars } from "react-icons/fa";
+
 import {
   Nav,
   NavbarContainer,

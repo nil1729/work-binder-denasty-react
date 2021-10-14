@@ -1,15 +1,10 @@
-import React, { useState, useEffect } from "react";
-import Divider from "@material-ui/core/Divider";
+import React, { useState } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import { Link } from "react-router-dom";
-import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { useHistory, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
-import { signInUser } from "../store/actions/auth";
 import checker from "../components/utils/checkFields";
 import { addComment } from "../store/actions/blogs";
 

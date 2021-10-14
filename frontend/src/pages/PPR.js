@@ -5,19 +5,28 @@ import { getRankings } from "../store/actions/dynasty/rankings";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import InfiniteScroll from "react-infinite-scroll-component";
 import styled from "styled-components";
+
+const Page = styled.div`
+  color: ${(props) => props.theme.textColor};
+  transition: all 1.5s ease;
+  width: 800px;
+  margin: auto;
+  margin-top: 2rem;
+  @media (max-width: 600px) {
+    width: 95%;
+    margin-top: 1.5rem;
+  }
+`;
 function PPR({ getRankings }) {
   const [leagFormat, setLeagueFormat] = useState("PPR");
   const [rankingList, setRankingList] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
 
-  useEffect(
-    (leagFormat) => {
-      fetchMoreData(leagFormat);
-      // eslint-disable-next-line
-    },
-    [leagFormat]
-  );
+  useEffect(() => {
+    fetchMoreData(leagFormat);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [leagFormat]);
 
   const changeTab = (tabIndex) => async () => {
     setLeagueFormat(tabIndex);
@@ -36,17 +45,7 @@ function PPR({ getRankings }) {
       setHasMore(false);
     }
   };
-  const Page = styled.div`
-    color: ${(props) => props.theme.textColor};
-    transition: all 1.5s ease;
-    width: 800px;
-    margin: auto;
-    margin-top: 2rem;
-    @media (max-width: 600px) {
-      width: 95%;
-      margin-top: 1.5rem;
-    }
-  `;
+
   return (
     <Page>
       {/* <div className={styles.container}> */}
@@ -96,6 +95,7 @@ function PPR({ getRankings }) {
                   className={`${(index + 1) % 2 === 0 ? styles.odd_row : ""} ${
                     styles.table__row
                   }`}
+                  key={index}
                 >
                   <div className={`${styles.table__data} ${styles.rank_index}`}>
                     <h3>{player.rank}</h3>

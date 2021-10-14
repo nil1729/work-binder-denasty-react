@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import styles from "./index.module.scss";
 
-const getItemStyle = (isDragging, draggableStyle) => ({
-  transform: isDragging ? "scale(2)" : "scale(1)",
-  ...draggableStyle,
-});
+// const getItemStyle = (isDragging, draggableStyle) => ({
+//   transform: isDragging ? "scale(2)" : "scale(1)",
+//   ...draggableStyle,
+// });
 
 function QuoteApp() {
   const [myList, setMyList] = useState([
