@@ -80,7 +80,12 @@ const App = ({ loadUser }) => {
             theme={theme}
             setTheme={setTheme}
           />
-          <Navbar toggle={toggle} openStatus={isOpen} />
+          <Navbar
+            toggle={toggle}
+            openStatus={isOpen}
+            theme={theme}
+            setTheme={setTheme}
+          />
           <CustomSnackbar />
           <Switch>
             <Route exact path="/" component={Home} />

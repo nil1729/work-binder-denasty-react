@@ -2,7 +2,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { logOut } from "../../store/actions/auth";
-
+import styles from "./Navbar.module.scss";
 import {
   Nav,
   NavbarContainer,
@@ -18,7 +18,16 @@ const Navbar = ({
   openStatus,
   authState: { isAuthenticated },
   logOut,
+  ...props
 }) => {
+  const changeTab = (tab) => async () => {
+    // setLeagueFormat(tab);
+    if (tab === "ON") {
+      props.setTheme("dark");
+    } else {
+      props.setTheme("light");
+    }
+  };
   return (
     <>
       <Nav>
@@ -52,6 +61,23 @@ const Navbar = ({
               ) : (
                 <NavLinks to="/dashboard">DASHBOARD</NavLinks>
               )}
+            </NavItem>
+            <NavItem>
+              <div className={styles.tab__btn__container}>
+                <div
+                  className={`${styles.tab__btn} ${
+                    props.theme === "dark" ? styles.tab__active_dark : ""
+                  }`}
+                  onClick={changeTab("ON")}
+                ></div>
+                <div
+                  className={`${styles.tab__btn} ${
+                    props.theme === "light" ? styles.tab__active : ""
+                  }`}
+                  onClick={changeTab("OFF")}
+                ></div>
+              </div>
+              {/* <span>Dark Mode</span> */}
             </NavItem>
           </NavMenu>
         </NavbarContainer>

@@ -54,17 +54,13 @@ const Sidebar = ({ isOpen, toggle, ...props }) => {
                 props.theme === "dark" ? styles.tab__active_dark : ""
               }`}
               onClick={changeTab("ON")}
-            >
-              ON
-            </div>
+            ></div>
             <div
               className={`${styles.tab__btn} ${
                 props.theme === "light" ? styles.tab__active : ""
               }`}
               onClick={changeTab("OFF")}
-            >
-              OFF
-            </div>
+            ></div>
           </div>
           <p>Dark Mode</p>
         </li>

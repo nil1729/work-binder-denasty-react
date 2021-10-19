@@ -74,20 +74,20 @@ export const NavMenu = styled.ul`
   align-items: center;
   list-style: none;
   text-align: right;
-
   @media screen and (max-width: 628px) {
     display: none;
   }
 `;
 export const NavItem = styled.li`
   ${"" /* height: 21px; */}
+  margin-right: 30px;
 `;
 export const NavLinks = styled(LinkR)`
   display: flex;
   align-items: right;
   text-decoration: none;
   padding: 10px;
-  margin-right: 50px;
+
   ${"" /* height: 21px; */}
   cursor: pointer;
   font-family: "Nunito Sans", sans-serif;

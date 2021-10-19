@@ -1,0 +1,32 @@
+@import "../../styles/variables";
+.tab__active {
+  background-color: $primary-color;
+  color: $primary-text-color;
+  transition: 0.25s ease-in-out;
+}
+.tab__active_dark {
+  background-color: black;
+  color: #fff;
+}
+.tab__btn__container {
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 15px;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 20px;
+
+  padding: 3px;
+  .tab__btn {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14.5px;
+    border-radius: 20px;
+    cursor: pointer;
+    user-select: none;
+    height: 100%;
+  }
+}
